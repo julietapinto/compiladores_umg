@@ -27,11 +27,13 @@ expr : expr (MUL | DIV) expr   #aritmetica
      | ID                      #variable
      | '(' expr ')'            #parentesis ;
 
-MUL : '*' ;
+MUL : '*' ;    // Simbolos de para datos
 DIV : '/' ;
 SUM : '+' ;
 RES : '-' ;
-ID  : [a-zA-ZáéíóúÁÉÍÓÚ_][a-zA-Z0-9_]* ;
-NUM : [0-9]+ ;
-WS  : [ \t\r\n]+ -> skip ;
+ID  : [a-zA-ZáéíóúÁÉÍÓÚ_][a-zA-Z0-9_]* ; //  Todo el teclado alphanumerico incluyendo lestras con Tilde
+NUM : [0-9]+ ;   // numeros enteros 
+WS  : [ \t\r\n]+ -> skip ;    
+
 COMMENT : '//' ~[\n\r]* -> skip ;
+
