@@ -1,7 +1,7 @@
 grammar Expresiones;
 
-// Regla principal
-root : 'program' '{' instrucciones+ '}' EOF ;
+// Regla raíz
+root : 'EZEQUIELAQUIINICIA' '(' ')' '[' instrucciones+ ']' 'EZEQUIELAQUIFINALIZA' '(' ')' EOF ;
 
 // Tipos de instrucciones
 instrucciones : asignacion ';' 
@@ -48,3 +48,4 @@ NUM : [0-9]+ ;
 
 // Salto de espacios
 WS  : [ \t\r\n]+ -> skip ;
+
