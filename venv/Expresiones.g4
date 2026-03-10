@@ -3,7 +3,6 @@ grammar Expresiones;
 // Regla raíz
 root : 'EZEQUIELAQUIINICIA' '(' ')' '[' instrucciones+ ']' 'EZEQUIELAQUIFINALIZA' '(' ')' EOF ;
 
-// Tipos de instrucciones
 instrucciones : declaracion ';'
               | asignacion ';'
               | condicional
@@ -28,4 +27,11 @@ expr : expr (MUL | DIV) expr   #aritmetica
      | ID                      #variable
      | '(' expr ')'            #parentesis ;
 
-
+MUL : '*' ;
+DIV : '/' ;
+SUM : '+' ;
+RES : '-' ;
+ID  : [a-zA-ZáéíóúÁÉÍÓÚ_][a-zA-Z0-9_]* ;
+NUM : [0-9]+ ;
+WS  : [ \t\r\n]+ -> skip ;
+COMMENT : '//' ~[\n\r]* -> skip ;

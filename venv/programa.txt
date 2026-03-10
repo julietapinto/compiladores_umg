@@ -1,0 +1,22 @@
+EZEQUIELAQUIINICIA ()[
+    // Declaración de variables
+    SONTAY x;
+    SONTAY w;
+    SONTAY z;
+
+    // Asignaciones iniciales
+    x = 10;
+    z = 20;
+
+    // Prueba del condicional personalizado
+    CHI_LO_HACE [CON x > 3]
+        w = z / 2;
+    TONCES []
+        w = z - 5; 
+    CHI_NO [
+        w = 0;
+    ]
+
+    // Una operación extra para verificar
+    x = w + 5;
+]EZEQUIELAQUIFINALIZA ()
