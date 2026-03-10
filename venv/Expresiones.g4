@@ -21,3 +21,11 @@ bloqueInstrucciones : instrucciones
                    | '[' instrucciones+ ']' ;
 
 condicion : expr op=( '>' | '<' | '==' | '!=' | '>=' | '<=' ) expr ;
+
+expr : expr (MUL | DIV) expr   #aritmetica
+     | expr (SUM | RES) expr   #aritmetica
+     | NUM                     #numero
+     | ID                      #variable
+     | '(' expr ')'            #parentesis ;
+
+
