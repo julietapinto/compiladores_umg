@@ -4,8 +4,9 @@ grammar Expresiones;
 root : 'EZEQUIELAQUIINICIA' '(' ')' '[' instrucciones+ ']' 'EZEQUIELAQUIFINALIZA' '(' ')' EOF ;
 
 // Tipos de instrucciones
-instrucciones : asignacion ';' 
-              | condicional    
+instrucciones : declaracion ';'
+              | asignacion ';'
+              | condicional
               | expr ';' ;
 
 // Condicional compacto
@@ -48,4 +49,5 @@ NUM : [0-9]+ ;
 
 // Salto de espacios
 WS  : [ \t\r\n]+ -> skip ;
+
 
