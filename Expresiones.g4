@@ -32,8 +32,8 @@ asignacion
 // CONDICIONAL
 // =========================
 condicional
-    : CHI_LO_HACE LBRACKET CON condicion RBRACKET bloqueInstrucciones
-      (TONCES LBRACKET RBRACKET bloqueInstrucciones)?
+    : CHI_LO_HACE LPAREN CON condicion RPAREN bloqueInstrucciones
+      (TONCES bloqueInstrucciones)?
       (CHI_NO bloqueInstrucciones)?
     ;
 

@@ -1,89 +1,161 @@
 from parser.ExpresionesVisitor import ExpresionesVisitor
 
+
 class EvalVisitor(ExpresionesVisitor):
     def __init__(self):
-        # Tabla de símbolos (Memoria del compilador)
+        # Memoria (tabla de símbolos)
         self.memoria = {}
 
-    def __init__(self):
-        self.memoria = {}
-
-    # --- ROOT ---
+    # =========================
+    # ROOT
+    # =========================
     def visitRoot(self, ctx):
         return self.visitChildren(ctx)
 
-    # --- DECLARACION ---
+    # =========================
+    # INSTRUCCIONES
+    # =========================
+    def visitInstrucciones(self, ctx):
+        return self.visitChildren(ctx)
+
+    # =========================
+    # DECLARACIÓN
+    # =========================
     def visitDeclaracion(self, ctx):
         nombre = ctx.ID().getText()
         if nombre not in self.memoria:
             self.memoria[nombre] = 0
         return 0
 
-    # --- ASIGNACION ---
+    # =========================
+    # ASIGNACIÓN
+    # =========================
     def visitAsignacion(self, ctx):
         nombre = ctx.ID().getText()
         valor = self.visit(ctx.expr())
         self.memoria[nombre] = valor
         return valor
 
-    # --- CONDICIONAL ---
+    # =========================
+    # CONDICIONAL
+    # =========================
     def visitCondicional(self, ctx):
-        cumple = self.visit(ctx.condicion())  # 🔥 CORRECTO
+        condicion = self.visit(ctx.condicion())
 
-        if cumple:
-            return self.visit(ctx.bloqueInstrucciones(0))
+        bloques = ctx.bloqueInstrucciones()
 
-        # TONCES (else)
-        if len(ctx.bloqueInstrucciones()) > 1:
-            return self.visit(ctx.bloqueInstrucciones(1))
+        # IF
+        if condicion:
+            return self.visit(bloques[0])
 
-        # CHI_NO (else alternativo)
-        if len(ctx.bloqueInstrucciones()) > 2:
-            return self.visit(ctx.bloqueInstrucciones(2))
+        # CHI_NO (else if exists as second block)
+        if len(bloques) == 2:
+            return self.visit(bloques[1])
+
+        # TONCES (si lo usas como segundo bloque separado)
+        if len(bloques) > 2:
+            return self.visit(bloques[2])
 
         return 0
 
-    # --- COMPARACION ---
-    def visitComparacion(self, ctx):
-        izq = self.visit(ctx.expr(0))
-        der = self.visit(ctx.expr(1))
-        op = ctx.op.text
+    # =========================
+    # BLOQUE
+    # =========================
+    def visitBloqueInstrucciones(self, ctx):
+        return self.visitChildren(ctx)
 
-        if op == '>': return izq > der
-        if op == '<': return izq < der
-        if op == '==': return izq == der
-        if op == '!=': return izq != der
-        if op == '>=': return izq >= der
-        if op == '<=': return izq <= der
+    # =========================
+    # CONDICIONES LÓGICAS
+    # =========================
+    def visitOrExpr(self, ctx):
+        left = self.visit(ctx.andExpr(0))
+
+        for i in range(1, len(ctx.andExpr())):
+            if left:
+                return True
+            left = left or self.visit(ctx.andExpr(i))
+
+        return left
+
+    def visitAndExpr(self, ctx):
+        left = self.visit(ctx.notExpr(0))
+
+        for i in range(1, len(ctx.notExpr())):
+            if not left:
+                return False
+            left = left and self.visit(ctx.notExpr(i))
+
+        return left
+
+    def visitNotExpr(self, ctx):
+        if ctx.NOT():
+            return not self.visit(ctx.notExpr())
+
+        if ctx.comparacion():
+            return self.visit(ctx.comparacion())
+
+        if ctx.condicion():
+            return self.visit(ctx.condicion())
 
         return False
 
-    # --- ARITMETICA ---
+    # =========================
+    # COMPARACIÓN
+    # =========================
+    def visitComparacion(self, ctx):
+        izq = self.visit(ctx.expr(0))
+        der = self.visit(ctx.expr(1))
+        op = ctx.relop().getText()
+
+        if op == '>':
+            return izq > der
+        if op == '<':
+            return izq < der
+        if op == '==':
+            return izq == der
+        if op == '!=':
+            return izq != der
+        if op == '>=':
+            return izq >= der
+        if op == '<=':
+            return izq <= der
+
+        return False
+
+    # =========================
+    # EXPRESIONES ARITMÉTICAS
+    # =========================
     def visitAritmetica(self, ctx):
         izq = self.visit(ctx.expr(0))
         der = self.visit(ctx.expr(1))
         op = ctx.getChild(1).getText()
 
-        if op == '+': return izq + der
-        if op == '-': return izq - der
-        if op == '*': return izq * der
-        if op == '/': return izq / der if der != 0 else 0
+        if op == '+':
+            return izq + der
+        if op == '-':
+            return izq - der
+        if op == '*':
+            return izq * der
+        if op == '/':
+            return izq / der if der != 0 else 0
 
         return 0
 
-    # --- NUMERO ---
+    # =========================
+    # NUMERO
+    # =========================
     def visitNumero(self, ctx):
         return int(ctx.NUM().getText())
 
-    # --- VARIABLE ---
+    # =========================
+    # VARIABLE
+    # =========================
     def visitVariable(self, ctx):
         nombre = ctx.ID().getText()
         return self.memoria.get(nombre, 0)
 
-    # --- PARENTESIS ---
+    # =========================
+    # PARENTESIS
+    # =========================
     def visitParentesis(self, ctx):
         return self.visit(ctx.expr())
-
-    # --- BLOQUES ---
-    def visitBloqueInstrucciones(self, ctx):
-        return self.visitChildren(ctx)

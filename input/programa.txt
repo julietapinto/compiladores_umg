@@ -1,24 +1,26 @@
 EZEQUIELAQUIINICIA()[
     SONTAY a;
     SONTAY b;
+    SONTAY resultado;
+    SONTAY bandera;
 
     a = 10;
     b = 5;
 
-    CHI_LO_HACE[CON a > b && b != 0] [
-        SONTAY resultado;
+    CHI_LO_HACE(CON a > b && b != 0) [
         resultado = a + b;
-    ] TONCES[] [
-        SONTAY resultado;
+        bandera = 1;
+    ] TONCES [
         resultado = a - b;
+        bandera = 0;
     ] CHI_NO [
-        SONTAY resultado;
         resultado = 0;
+        bandera = 0;
     ]
 
-    CHI_LO_HACE[CON !(a < b || b == 0)] [
-        SONTAY bandera;
+    CHI_LO_HACE(CON !(a < b || b == 0)) [
+        resultado = resultado + 100;
         bandera = 1;
     ]
 ]
-EZEQUIELAQUIFINALIZA() 
+EZEQUIELAQUIFINALIZA()

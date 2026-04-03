@@ -62,21 +62,12 @@ class ExpresionesListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ExpresionesParser#notExpr.
-    def enterNotExpr(self, ctx:ExpresionesParser.NotExprContext):
+    # Enter a parse tree produced by ExpresionesParser#condicion.
+    def enterCondicion(self, ctx:ExpresionesParser.CondicionContext):
         pass
 
-    # Exit a parse tree produced by ExpresionesParser#notExpr.
-    def exitNotExpr(self, ctx:ExpresionesParser.NotExprContext):
-        pass
-
-
-    # Enter a parse tree produced by ExpresionesParser#parenCondicion.
-    def enterParenCondicion(self, ctx:ExpresionesParser.ParenCondicionContext):
-        pass
-
-    # Exit a parse tree produced by ExpresionesParser#parenCondicion.
-    def exitParenCondicion(self, ctx:ExpresionesParser.ParenCondicionContext):
+    # Exit a parse tree produced by ExpresionesParser#condicion.
+    def exitCondicion(self, ctx:ExpresionesParser.CondicionContext):
         pass
 
 
@@ -89,21 +80,30 @@ class ExpresionesListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ExpresionesParser#comparacion.
-    def enterComparacion(self, ctx:ExpresionesParser.ComparacionContext):
-        pass
-
-    # Exit a parse tree produced by ExpresionesParser#comparacion.
-    def exitComparacion(self, ctx:ExpresionesParser.ComparacionContext):
-        pass
-
-
     # Enter a parse tree produced by ExpresionesParser#andExpr.
     def enterAndExpr(self, ctx:ExpresionesParser.AndExprContext):
         pass
 
     # Exit a parse tree produced by ExpresionesParser#andExpr.
     def exitAndExpr(self, ctx:ExpresionesParser.AndExprContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#notExpr.
+    def enterNotExpr(self, ctx:ExpresionesParser.NotExprContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#notExpr.
+    def exitNotExpr(self, ctx:ExpresionesParser.NotExprContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#comparacion.
+    def enterComparacion(self, ctx:ExpresionesParser.ComparacionContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#comparacion.
+    def exitComparacion(self, ctx:ExpresionesParser.ComparacionContext):
         pass
 
 
@@ -140,6 +140,15 @@ class ExpresionesListener(ParseTreeListener):
 
     # Exit a parse tree produced by ExpresionesParser#variable.
     def exitVariable(self, ctx:ExpresionesParser.VariableContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#relop.
+    def enterRelop(self, ctx:ExpresionesParser.RelopContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#relop.
+    def exitRelop(self, ctx:ExpresionesParser.RelopContext):
         pass
 
 
