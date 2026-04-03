@@ -1,13 +1,13 @@
 import sys
 from antlr4 import *
-from ExpresionesLexer import ExpresionesLexer
-from ExpresionesParser import ExpresionesParser
+from parser.ExpresionesLexer import ExpresionesLexer
+from parser.ExpresionesParser import ExpresionesParser
 from EvalVisitor import EvalVisitor  # Aquí importamos tu visor personalizado
 
 def main():
     # 1. Leer el archivo de entrada 
     try:
-        input_stream = FileStream("programa.txt", encoding='utf-8')
+        input_stream = FileStream("input/programa.txt", encoding='utf-8')
     except FileNotFoundError:
         print("Error: No se encontró el archivo 'programa.txt'")
         return
