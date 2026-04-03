@@ -1,55 +1,85 @@
 grammar Expresiones;
 
-// Regla raíz
+// =========================
+// ROOT
+// =========================
 root
-    : PROGRAMA_INICIO '(' ')' '[' instrucciones+ ']' PROGRAMA_FIN '(' ')' EOF
+    : PROGRAMA_INICIO LPAREN RPAREN LBRACKET instrucciones+ RBRACKET PROGRAMA_FIN LPAREN RPAREN EOF
     ;
 
-instrucciones : declaracion ';'
-              | asignacion ';'
-              | condicional
-              | expr ';' ;
-
-declaracion : 'SONTAY' ID ;
-
-asignacion : ID '=' expr ;
-
-// ---------------------
-// CONDICIONALES
-// ---------------------
-condicional 
-    : 'CHI_LO_HACE' '[' 'CON' condicion ']' bloqueInstrucciones
-      ( 'TONCES' '[' ']' bloqueInstrucciones )?
-      ( 'CHI_NO' bloqueInstrucciones )?
+// =========================
+// INSTRUCCIONES
+// =========================
+instrucciones
+    : declaracion SEMI
+    | asignacion SEMI
+    | condicional
+    | expr SEMI
     ;
 
-bloqueInstrucciones 
-    : '[' instrucciones+ ']'
+// =========================
+// DECLARACION / ASIGNACION
+// =========================
+declaracion
+    : SONTAY ID
     ;
 
-// ---------------------
-// CONDICIONES LÓGICAS
-// ---------------------
+asignacion
+    : ID ASSIGN expr
+    ;
+
+// =========================
+// CONDICIONAL
+// =========================
+condicional
+    : CHI_LO_HACE LBRACKET CON condicion RBRACKET bloqueInstrucciones
+      (TONCES LBRACKET RBRACKET bloqueInstrucciones)?
+      (CHI_NO bloqueInstrucciones)?
+    ;
+
+bloqueInstrucciones
+    : LBRACKET instrucciones+ RBRACKET
+    ;
+
+// =========================
+// CONDICIONES (CORREGIDAS)
+// =========================
 condicion
-    : condicion OR condicion              #orExpr
-    | condicion AND condicion            #andExpr
-    | NOT condicion                      #notExpr
-    | expr relop expr                    #comparacion 
-    | '(' condicion ')'                 #parenCondicion
+    : orExpr
     ;
 
-// ---------------------
-// EXPRESIONES ARITMÉTICAS
-// ---------------------
-expr : expr (MUL | DIV) expr   #aritmetica
-     | expr (SUM | RES) expr   #aritmetica
-     | NUM                     #numero
-     | ID                      #variable
-     | '(' expr ')'            #parentesis ;
+orExpr
+    : andExpr (OR andExpr)*
+    ;
 
-// ---------------------
-// REGLA OPERADORES
-// ---------------------
+andExpr
+    : notExpr (AND notExpr)*
+    ;
+
+notExpr
+    : NOT notExpr
+    | comparacion
+    | LPAREN condicion RPAREN
+    ;
+
+comparacion
+    : expr relop expr
+    ;
+
+// =========================
+// EXPRESIONES ARITMÉTICAS
+// =========================
+expr
+    : expr (MUL | DIV) expr   #aritmetica
+    | expr (SUM | RES) expr   #aritmetica
+    | NUM                     #numero
+    | ID                      #variable
+    | LPAREN expr RPAREN      #parentesis
+    ;
+
+// =========================
+// RELOP
+// =========================
 relop
     : GT
     | LT
@@ -59,10 +89,9 @@ relop
     | LTE
     ;
 
-// ---------------------
-// TOKENS
-// ---------------------
-
+// =========================
+// TOKENS KEYWORDS
+// =========================
 PROGRAMA_INICIO : 'EZEQUIELAQUIINICIA' ;
 PROGRAMA_FIN    : 'EZEQUIELAQUIFINALIZA' ;
 
@@ -72,6 +101,19 @@ TONCES          : 'TONCES' ;
 CHI_NO          : 'CHI_NO' ;
 CON             : 'CON' ;
 
+// =========================
+// SYMBOLS
+// =========================
+LPAREN  : '(' ;
+RPAREN  : ')' ;
+LBRACKET: '[' ;
+RBRACKET: ']' ;
+SEMI    : ';' ;
+ASSIGN  : '=' ;
+
+// =========================
+// OPERADORES
+// =========================
 MUL : '*' ;
 DIV : '/' ;
 SUM : '+' ;
@@ -88,6 +130,9 @@ AND : '&&' ;
 OR  : '||' ;
 NOT : '!' ;
 
+// =========================
+// LEXER
+// =========================
 ID  : [a-zA-ZáéíóúÁÉÍÓÚ_][a-zA-Z0-9_]* ;
 NUM : [0-9]+ ;
 
