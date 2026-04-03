@@ -1,38 +1,47 @@
-class SymbolTable:
-    def __init__(self):
-        # La PILA: Una lista de diccionarios (Hash Tables)
-        # Iniciamos con el Ámbito Global en el índice 0
-        self.stack = [{}]
+import sys
+from antlr4 import *
+from ExpresionesLexer import ExpresionesLexer
+from ExpresionesParser import ExpresionesParser
+from EvalVisitor import EvalVisitor
 
-    def push_scope(self):
-        """Crea un nuevo nivel de memoria (Scope) al entrar a un bloque []"""
-        self.stack.append({})
-        print("DEBUG: [PUSH] Nuevo ámbito creado.")
+def main():
+    # 1. Ruta del archivo de entrada (Asegúrate que exista en la Asus)
+    input_file = "input/programa.txt"
+    
+    try:
+        input_stream = FileStream(input_file, encoding='utf-8')
+    except FileNotFoundError:
+        # Intento B: Por si el archivo está en la raíz
+        try:
+            input_stream = FileStream("programa.txt", encoding='utf-8')
+        except FileNotFoundError:
+            print(f"Error: No se encontró el archivo '{input_file}' o 'programa.txt'")
+            return
 
-    def pop_scope(self):
-        """Elimina el nivel de memoria actual al salir de un bloque []"""
-        if len(self.stack) > 1:
-            self.stack.pop()
-            print("DEBUG: [POP] Ámbito cerrado. Variables locales eliminadas.")
+    # 2. Análisis Léxico y Sintáctico
+    lexer = ExpresionesLexer(input_stream)
+    stream = CommonTokenStream(lexer)
+    parser = ExpresionesParser(stream)
+    tree = parser.prog()
 
-    def declare(self, name, value=0):
-        """Para SONTAY: Registra la variable solo en el nivel actual."""
-        current_scope = self.stack[-1]
-        if name in current_scope:
-            raise Exception(f"Error Semántico: La variable '{name}' ya fue declarada en este ámbito.")
-        current_scope[name] = value
+    if parser.getNumberOfSyntaxErrors() > 0:
+        print("Error: Se detectaron errores sintácticos.")
+        return
 
-    def update(self, name, value):
-        """Para '=': Busca la variable en la pila y cambia su valor."""
-        for scope in reversed(self.stack):
-            if name in scope:
-                scope[name] = value
-                return
-        raise Exception(f"Error Semántico: La variable '{name}' no ha sido declarada (Usa SONTAY).")
+    print("Análisis sintáctico exitoso. Ejecutando programa...\n")
 
-    def lookup(self, name):
-        """Para usar variables: Busca de adentro hacia afuera."""
-        for scope in reversed(self.stack):
-            if name in scope:
-                return scope[name]
-        raise Exception(f"Error Semántico: La variable '{name}' no existe.")
+    # 3. Ejecución con el Visitor
+    visitor = EvalVisitor()
+    visitor.visit(tree)
+
+    # 4. Mostrar Resultados de la Tabla Hash (Memoria)
+    print("--- Resultados del Programa (Memoria) ---")
+    if not visitor.memoria:
+        print("La memoria está vacía (no hubo asignaciones).")
+    else:
+        for var, val in visitor.memoria.items():
+            print(f"{var}: {val}")
+    print("-----------------------------------------")
+
+if __name__ == '__main__':
+    main()
