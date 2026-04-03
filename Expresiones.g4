@@ -12,15 +12,19 @@ declaracion : 'SONTAY' ID ;
 
 asignacion : ID '=' expr ;
 
-condicional : 'CHI_LO_HACE' '[' 'CON' condicion ']' bloqueInstrucciones
-              ( 'TONCES' '[' ']' bloqueInstrucciones )?
-              ( 'CHI_NO' '[' instrucciones* ']' )? ;
+condicional 
+    : 'CHI_LO_HACE' '[' 'CON' condicion ']' bloqueInstrucciones
+      ( 'TONCES' '[' ']' bloqueInstrucciones )?
+      ( 'CHI_NO' bloqueInstrucciones )?
+    ;
 
 bloqueInstrucciones 
     : '[' instrucciones+ ']'
     ;
 
-condicion : expr op=( '>' | '<' | '==' | '!=' | '>=' | '<=' ) expr ;
+condicion 
+    : expr op=( '>' | '<' | '==' | '!=' | '>=' | '<=' ) expr #comparacion
+    ;
 
 expr : expr (MUL | DIV) expr   #aritmetica
      | expr (SUM | RES) expr   #aritmetica
