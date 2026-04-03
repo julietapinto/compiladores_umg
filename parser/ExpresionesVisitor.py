@@ -39,8 +39,28 @@ class ExpresionesVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by ExpresionesParser#notExpr.
+    def visitNotExpr(self, ctx:ExpresionesParser.NotExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExpresionesParser#parenCondicion.
+    def visitParenCondicion(self, ctx:ExpresionesParser.ParenCondicionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExpresionesParser#orExpr.
+    def visitOrExpr(self, ctx:ExpresionesParser.OrExprContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by ExpresionesParser#comparacion.
     def visitComparacion(self, ctx:ExpresionesParser.ComparacionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExpresionesParser#andExpr.
+    def visitAndExpr(self, ctx:ExpresionesParser.AndExprContext):
         return self.visitChildren(ctx)
 
 

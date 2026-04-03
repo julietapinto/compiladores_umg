@@ -1,23 +1,24 @@
-EZEQUIELAQUIINICIA ()[
-    SONTAY x;
-    SONTAY w;
-    SONTAY z;
+EZEQUIELAQUIINICIA()[
+    SONTAY a;
+    SONTAY b;
 
-    x = 10;
-    z = 20;
+    a = 10;
+    b = 5;
 
-    CHI_LO_HACE [CON x > 3]
-    [
-        w = z / 2;
-    ]
-    TONCES []
-    [
-        w = z - 5; 
-    ]
-    CHI_NO 
-    [
-        w = 0;
+    CHI_LO_HACE[CON a > b && b != 0] [
+        SONTAY resultado;
+        resultado = a + b;
+    ] TONCES[] [
+        SONTAY resultado;
+        resultado = a - b;
+    ] CHI_NO [
+        SONTAY resultado;
+        resultado = 0;
     ]
 
-    x = w + 5;
-]EZEQUIELAQUIFINALIZA ()
+    CHI_LO_HACE[CON !(a < b || b == 0)] [
+        SONTAY bandera;
+        bandera = 1;
+    ]
+]
+EZEQUIELAQUIFINALIZA() 

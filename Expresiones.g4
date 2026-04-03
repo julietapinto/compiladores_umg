@@ -1,7 +1,9 @@
 grammar Expresiones;
 
 // Regla raíz
-root : 'EZEQUIELAQUIINICIA' '(' ')' '[' instrucciones+ ']' 'EZEQUIELAQUIFINALIZA' '(' ')' EOF ;
+root
+    : PROGRAMA_INICIO '(' ')' '[' instrucciones+ ']' PROGRAMA_FIN '(' ')' EOF
+    ;
 
 instrucciones : declaracion ';'
               | asignacion ';'
@@ -48,6 +50,17 @@ expr : expr (MUL | DIV) expr   #aritmetica
 // ---------------------
 // TOKENS
 // ---------------------
+
+PROGRAMA_INICIO : 'EZEQUIELAQUIINICIA' ;
+PROGRAMA_FIN    : 'EZEQUIELAQUIFINALIZA' ;
+
+SONTAY          : 'SONTAY' ;
+CHI_LO_HACE     : 'CHI_LO_HACE' ;
+TONCES          : 'TONCES' ;
+CHI_NO          : 'CHI_NO' ;
+CON             : 'CON' ;
+
+
 AND : '&&' ;
 OR  : '||' ;
 NOT : '!' ;
