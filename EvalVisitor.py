@@ -1,6 +1,9 @@
 from parser.ExpresionesVisitor import ExpresionesVisitor
 
 class EvalVisitor(ExpresionesVisitor):
+    def __init__(self):
+        # Tabla de símbolos (Memoria del compilador)
+        self.memoria = {}
 
     def __init__(self):
         self.memoria = {}

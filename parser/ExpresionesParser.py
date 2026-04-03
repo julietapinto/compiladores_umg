@@ -590,10 +590,11 @@ class ExpresionesParser ( Parser ):
                 listener.exitComparacion(self)
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitComparacion" ):
-                return visitor.visitComparacion(self)
+            if hasattr( visitor, "visitCondicion" ):
+                return visitor.visitCondicion(self)
             else:
                 return visitor.visitChildren(self)
+
 
 
 
@@ -875,7 +876,3 @@ class ExpresionesParser ( Parser ):
             if predIndex == 1:
                 return self.precpred(self._ctx, 4)
          
-
-
-
-
