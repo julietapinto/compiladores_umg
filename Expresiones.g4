@@ -48,6 +48,18 @@ expr : expr (MUL | DIV) expr   #aritmetica
      | '(' expr ')'            #parentesis ;
 
 // ---------------------
+// REGLA OPERADORES
+// ---------------------
+relop
+    : GT
+    | LT
+    | EQ
+    | NEQ
+    | GTE
+    | LTE
+    ;
+
+// ---------------------
 // TOKENS
 // ---------------------
 
@@ -60,15 +72,21 @@ TONCES          : 'TONCES' ;
 CHI_NO          : 'CHI_NO' ;
 CON             : 'CON' ;
 
-
-AND : '&&' ;
-OR  : '||' ;
-NOT : '!' ;
-
 MUL : '*' ;
 DIV : '/' ;
 SUM : '+' ;
 RES : '-' ;
+
+GT  : '>' ;
+LT  : '<' ;
+EQ  : '==' ;
+NEQ : '!=' ;
+GTE : '>=' ;
+LTE : '<=' ;
+
+AND : '&&' ;
+OR  : '||' ;
+NOT : '!' ;
 
 ID  : [a-zA-ZáéíóúÁÉÍÓÚ_][a-zA-Z0-9_]* ;
 NUM : [0-9]+ ;
