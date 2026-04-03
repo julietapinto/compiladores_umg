@@ -1,38 +1,22 @@
 EZEQUIELAQUIINICIA ()[
-    // --- ÁMBITO GLOBAL (Nivel 0) ---
+    // Declaración de variables
     SONTAY x;
-    SONTAY y;
-    SONTAY resultado;
-    
-    x = 15;
-    y = 5;
-    resultado = 0;
+    SONTAY w;
+    SONTAY z;
 
-    // PRUEBA 1: AND y Comparación
-    // (15 > 10) es TRUE y (5 < 10) es TRUE -> Entra
-    CHI_LO_HACE [CON (x > 10) AND (y < 10)]
-    [
-        // --- ÁMBITO LOCAL (Nivel 1) ---
-        SONTAY local_bloque;
-        local_bloque = 100;
-        resultado = x + y + local_bloque; 
-        // resultado debería ser 120
-    ]
+    // Asignaciones iniciales
+    x = 10;
+    z = 20;
 
-    // PRUEBA 2: OR y NOT
-    // (x == 0) es FALSE, pero (NOT (y == 0)) es TRUE -> Entra por OR
-    CHI_LO_HACE [CON (x == 0) OR (NOT (y == 0))]
-    [
-        // Modificamos variable global desde ámbito local
-        resultado = resultado / 2; 
-        // resultado debería ser 60
-    ]
+    // Prueba del condicional personalizado
+    CHI_LO_HACE [CON x > 3]
+        w = z / 2;
+    TONCES []
+        w = z - 5; 
     CHI_NO [
-        resultado = 1;
+        w = 0;
     ]
 
-    // PRUEBA 3: Prioridad de operaciones
-    // x será 60 + 5 * 2 = 70
-    x = resultado + 5 * 2;
-
+    // Una operación extra para verificar
+    x = w + 5;
 ]EZEQUIELAQUIFINALIZA ()
