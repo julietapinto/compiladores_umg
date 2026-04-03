@@ -1,53 +1,42 @@
 grammar Expresiones;
 
-// --- REGLAS SINTÁCTICAS ---
-ezequiel : 'EZEQUIELAQUIINICIA' '(' ')' '[' contenido ']' 'EZEQUIELAQUIFINALIZA' '(' ')' ;
+// Regla raíz
+root : 'EZEQUIELAQUIINICIA' '(' ')' '[' instrucciones+ ']' 'EZEQUIELAQUIFINALIZA' '(' ')' EOF ;
 
-contenido : (instruccion)* ;
-
-instruccion 
-    : declaracion ';'   # DoDeclaracion
-    | asignacion ';'    # DoAssign
-    | condicional       # DoCondicional
-    ;
+instrucciones : declaracion ';'
+              | asignacion ';'
+              | condicional
+              | expr ';' ;
 
 declaracion : 'SONTAY' ID ;
 
 asignacion : ID '=' expr ;
 
-condicional : 'CHI_LO_HACE' '[' 'CON' condicion ']' 
-              bloque 
-              ('TONCES' '[' ']' bloque)? 
-              ('CHI_NO' bloque)? ;
+condicional 
+    : 'CHI_LO_HACE' '[' 'CON' condicion ']' bloqueInstrucciones
+      ( 'TONCES' '[' ']' bloqueInstrucciones )?
+      ( 'CHI_NO' bloqueInstrucciones )?
+    ;
 
-bloque : '[' contenido ']' ;
+bloqueInstrucciones 
+    : '[' instrucciones+ ']'
+    ;
 
-condicion : expr '>' expr   # MayorQue
-          | expr '<' expr   # MenorQue
-          | expr '==' expr  # Igualdad
-          ;
+condicion 
+    : expr op=( '>' | '<' | '==' | '!=' | '>=' | '<=' ) expr #comparacion
+    ;
 
-expr : expr (MUL|DIV) expr  # MulDiv
-     | expr (ADD|SUB) expr  # AddSub
-     | INT                  # Int
-     | ID                   # Id
-     | '(' expr ')'         # Parens
-     ;
+expr : expr (MUL | DIV) expr   #aritmetica
+     | expr (SUM | RES) expr   #aritmetica
+     | NUM                     #numero
+     | ID                      #variable
+     | '(' expr ')'            #parentesis ;
 
-// --- REGLAS LÉXICAS ---
-SONTAY : 'SONTAY' ;
-CHI_LO_HACE : 'CHI_LO_HACE' ;
-TONCES : 'TONCES' ;
-CHI_NO : 'CHI_NO' ;
-CON : 'CON' ;
-
-ADD : '+' ;
-SUB : '-' ;
 MUL : '*' ;
 DIV : '/' ;
-
-ID  : [a-zA-Z]+ ;
-INT : [0-9]+ ;
-
-WS : [ \t\r\n]+ -> skip ;
-LINE_COMMENT : '//' ~[\r\n]* -> skip ;
+SUM : '+' ;
+RES : '-' ;
+ID  : [a-zA-ZáéíóúÁÉÍÓÚ_][a-zA-Z0-9_]* ;
+NUM : [0-9]+ ;
+WS  : [ \t\r\n]+ -> skip ;
+COMMENT : '//' ~[\n\r]* -> skip ;

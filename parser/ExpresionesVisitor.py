@@ -1,4 +1,4 @@
-# Generated from Expresiones.g4 by ANTLR 4.13.2
+# Generated from Expresiones.g4 by ANTLR 4.13.1
 from antlr4 import *
 if "." in __name__:
     from .ExpresionesParser import ExpresionesParser
@@ -39,8 +39,8 @@ class ExpresionesVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by ExpresionesParser#condicion.
-    def visitCondicion(self, ctx:ExpresionesParser.CondicionContext):
+    # Visit a parse tree produced by ExpresionesParser#comparacion.
+    def visitComparacion(self, ctx:ExpresionesParser.ComparacionContext):
         return self.visitChildren(ctx)
 
 

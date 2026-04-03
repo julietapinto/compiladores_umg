@@ -62,12 +62,12 @@ class ExpresionesListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ExpresionesParser#condicion.
-    def enterCondicion(self, ctx:ExpresionesParser.CondicionContext):
+    # Enter a parse tree produced by ExpresionesParser#comparacion.
+    def enterComparacion(self, ctx:ExpresionesParser.ComparacionContext):
         pass
 
-    # Exit a parse tree produced by ExpresionesParser#condicion.
-    def exitCondicion(self, ctx:ExpresionesParser.CondicionContext):
+    # Exit a parse tree produced by ExpresionesParser#comparacion.
+    def exitComparacion(self, ctx:ExpresionesParser.ComparacionContext):
         pass
 
 
