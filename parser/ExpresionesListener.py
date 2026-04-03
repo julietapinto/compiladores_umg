@@ -1,4 +1,4 @@
-# Generated from Expresiones.g4 by ANTLR 4.13.1
+# Generated from Expresiones.g4 by ANTLR 4.13.2
 from antlr4 import *
 if "." in __name__:
     from .ExpresionesParser import ExpresionesParser
@@ -71,6 +71,15 @@ class ExpresionesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ExpresionesParser#logicaNot.
+    def enterLogicaNot(self, ctx:ExpresionesParser.LogicaNotContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#logicaNot.
+    def exitLogicaNot(self, ctx:ExpresionesParser.LogicaNotContext):
+        pass
+
+
     # Enter a parse tree produced by ExpresionesParser#parentesis.
     def enterParentesis(self, ctx:ExpresionesParser.ParentesisContext):
         pass
@@ -89,6 +98,15 @@ class ExpresionesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ExpresionesParser#logicaAnd.
+    def enterLogicaAnd(self, ctx:ExpresionesParser.LogicaAndContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#logicaAnd.
+    def exitLogicaAnd(self, ctx:ExpresionesParser.LogicaAndContext):
+        pass
+
+
     # Enter a parse tree produced by ExpresionesParser#aritmetica.
     def enterAritmetica(self, ctx:ExpresionesParser.AritmeticaContext):
         pass
@@ -104,6 +122,24 @@ class ExpresionesListener(ParseTreeListener):
 
     # Exit a parse tree produced by ExpresionesParser#variable.
     def exitVariable(self, ctx:ExpresionesParser.VariableContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#comparacion.
+    def enterComparacion(self, ctx:ExpresionesParser.ComparacionContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#comparacion.
+    def exitComparacion(self, ctx:ExpresionesParser.ComparacionContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#logicaOr.
+    def enterLogicaOr(self, ctx:ExpresionesParser.LogicaOrContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#logicaOr.
+    def exitLogicaOr(self, ctx:ExpresionesParser.LogicaOrContext):
         pass
 
 
