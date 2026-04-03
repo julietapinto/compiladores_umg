@@ -34,7 +34,7 @@ condicion
     : condicion OR condicion              #orExpr
     | condicion AND condicion            #andExpr
     | NOT condicion                      #notExpr
-    | expr op=( '>' | '<' | '==' | '!=' | '>=' | '<=' ) expr #comparacion
+    | expr relop expr                    #comparacion 
     | '(' condicion ')'                 #parenCondicion
     ;
 
