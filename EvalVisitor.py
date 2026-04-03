@@ -5,93 +5,85 @@ class EvalVisitor(ExpresionesVisitor):
         # Tabla de símbolos (Memoria del compilador)
         self.memoria = {}
 
-    # --- ENTRADAS AL PROGRAMA ---
+    def __init__(self):
+        self.memoria = {}
+
+    # --- ROOT ---
     def visitRoot(self, ctx):
         return self.visitChildren(ctx)
 
-    # --- DECLARACIONES Y ASIGNACIONES ---
+    # --- DECLARACION ---
     def visitDeclaracion(self, ctx):
-        nombre_var = ctx.ID().getText()
-        if nombre_var not in self.memoria:
-            self.memoria[nombre_var] = 0
+        nombre = ctx.ID().getText()
+        if nombre not in self.memoria:
+            self.memoria[nombre] = 0
         return 0
 
+    # --- ASIGNACION ---
     def visitAsignacion(self, ctx):
-        nombre_var = ctx.ID().getText()
+        nombre = ctx.ID().getText()
         valor = self.visit(ctx.expr())
-        self.memoria[nombre_var] = valor
+        self.memoria[nombre] = valor
         return valor
 
-    # --- LÓGICA DE CONDICIONALES ---
-    # Nota: Ahora 'condicional' usa 'expr' directamente en lugar de 'condicion'
+    # --- CONDICIONAL ---
     def visitCondicional(self, ctx):
-        # Evaluamos la expresión dentro de [CON ...]
-        cumple = self.visit(ctx.expr()) 
-        
+        cumple = self.visit(ctx.condicion())  # 🔥 CORRECTO
+
         if cumple:
-            return self.visit(ctx.bloqueInstrucciones())
-        # Si tiene el bloque CHI_NO (el else)
-        elif ctx.instructions(): # Verifica si hay instrucciones en el bloque opcional
-             # Como el CHI_NO es opcional en tu g4: ( 'CHI_NO' '[' instrucciones* ']' )?
-             # Buscamos ejecutar ese bloque si el if falló.
-             return self.visitChildren(ctx) 
+            return self.visit(ctx.bloqueInstrucciones(0))
+
+        # TONCES (else)
+        if len(ctx.bloqueInstrucciones()) > 1:
+            return self.visit(ctx.bloqueInstrucciones(1))
+
+        # CHI_NO (else alternativo)
+        if len(ctx.bloqueInstrucciones()) > 2:
+            return self.visit(ctx.bloqueInstrucciones(2))
+
         return 0
 
-    # --- NUEVOS OPERADORES (Basados en las etiquetas # de la g4) ---
-
+    # --- COMPARACION ---
     def visitComparacion(self, ctx):
         izq = self.visit(ctx.expr(0))
         der = self.visit(ctx.expr(1))
-        op = ctx.getChild(1).getText()
-        
-        if op == '>':  return izq > der
-        if op == '<':  return izq < der
+        op = ctx.op.text
+
+        if op == '>': return izq > der
+        if op == '<': return izq < der
         if op == '==': return izq == der
         if op == '!=': return izq != der
         if op == '>=': return izq >= der
         if op == '<=': return izq <= der
+
         return False
 
-    def visitLogicaAnd(self, ctx):
-        izq = self.visit(ctx.expr(0))
-        der = self.visit(ctx.expr(1))
-        return bool(izq) and bool(der)
-
-    def visitLogicaOr(self, ctx):
-        izq = self.visit(ctx.expr(0))
-        der = self.visit(ctx.expr(1))
-        return bool(izq) or bool(der)
-
-    def visitLogicaNot(self, ctx):
-        valor = self.visit(ctx.expr())
-        return not bool(valor)
-
-    def visitPotencia(self, ctx):
-        izq = self.visit(ctx.expr(0))
-        der = self.visit(ctx.expr(1))
-        return izq ** der
-
-    # --- OPERACIONES MATEMÁTICAS ---
+    # --- ARITMETICA ---
     def visitAritmetica(self, ctx):
         izq = self.visit(ctx.expr(0))
         der = self.visit(ctx.expr(1))
-        op = ctx.getChild(1).getText() 
+        op = ctx.getChild(1).getText()
 
         if op == '+': return izq + der
         if op == '-': return izq - der
         if op == '*': return izq * der
         if op == '/': return izq / der if der != 0 else 0
+
         return 0
 
+    # --- NUMERO ---
     def visitNumero(self, ctx):
         return int(ctx.NUM().getText())
 
+    # --- VARIABLE ---
     def visitVariable(self, ctx):
-        nombre_var = ctx.ID().getText()
-        return self.memoria.get(nombre_var, 0)
+        nombre = ctx.ID().getText()
+        return self.memoria.get(nombre, 0)
 
+    # --- PARENTESIS ---
     def visitParentesis(self, ctx):
         return self.visit(ctx.expr())
 
+    # --- BLOQUES ---
     def visitBloqueInstrucciones(self, ctx):
         return self.visitChildren(ctx)

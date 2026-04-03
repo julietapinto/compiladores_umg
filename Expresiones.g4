@@ -16,8 +16,9 @@ condicional : 'CHI_LO_HACE' '[' 'CON' condicion ']' bloqueInstrucciones
               ( 'TONCES' '[' ']' bloqueInstrucciones )?
               ( 'CHI_NO' '[' instrucciones* ']' )? ;
 
-bloqueInstrucciones : instrucciones 
-                   | '[' instrucciones+ ']' ;
+bloqueInstrucciones 
+    : '[' instrucciones+ ']'
+    ;
 
 condicion : expr op=( '>' | '<' | '==' | '!=' | '>=' | '<=' ) expr ;
 

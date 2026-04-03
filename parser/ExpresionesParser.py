@@ -148,6 +148,12 @@ class ExpresionesParser ( Parser ):
             if hasattr( listener, "exitRoot" ):
                 listener.exitRoot(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitRoot" ):
+                return visitor.visitRoot(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -231,6 +237,12 @@ class ExpresionesParser ( Parser ):
             if hasattr( listener, "exitInstrucciones" ):
                 listener.exitInstrucciones(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitInstrucciones" ):
+                return visitor.visitInstrucciones(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -303,6 +315,12 @@ class ExpresionesParser ( Parser ):
             if hasattr( listener, "exitDeclaracion" ):
                 listener.exitDeclaracion(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitDeclaracion" ):
+                return visitor.visitDeclaracion(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -349,6 +367,12 @@ class ExpresionesParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitAsignacion" ):
                 listener.exitAsignacion(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAsignacion" ):
+                return visitor.visitAsignacion(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -409,6 +433,12 @@ class ExpresionesParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitCondicional" ):
                 listener.exitCondicional(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitCondicional" ):
+                return visitor.visitCondicional(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -502,6 +532,12 @@ class ExpresionesParser ( Parser ):
             if hasattr( listener, "exitBloqueInstrucciones" ):
                 listener.exitBloqueInstrucciones(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBloqueInstrucciones" ):
+                return visitor.visitBloqueInstrucciones(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -576,6 +612,12 @@ class ExpresionesParser ( Parser ):
             if hasattr( listener, "exitCondicion" ):
                 listener.exitCondicion(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitCondicion" ):
+                return visitor.visitCondicion(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -641,6 +683,12 @@ class ExpresionesParser ( Parser ):
             if hasattr( listener, "exitParentesis" ):
                 listener.exitParentesis(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitParentesis" ):
+                return visitor.visitParentesis(self)
+            else:
+                return visitor.visitChildren(self)
+
 
     class NumeroContext(ExprContext):
 
@@ -658,6 +706,12 @@ class ExpresionesParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitNumero" ):
                 listener.exitNumero(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitNumero" ):
+                return visitor.visitNumero(self)
+            else:
+                return visitor.visitChildren(self)
 
 
     class AritmeticaContext(ExprContext):
@@ -689,6 +743,12 @@ class ExpresionesParser ( Parser ):
             if hasattr( listener, "exitAritmetica" ):
                 listener.exitAritmetica(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAritmetica" ):
+                return visitor.visitAritmetica(self)
+            else:
+                return visitor.visitChildren(self)
+
 
     class VariableContext(ExprContext):
 
@@ -706,6 +766,12 @@ class ExpresionesParser ( Parser ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitVariable" ):
                 listener.exitVariable(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitVariable" ):
+                return visitor.visitVariable(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
