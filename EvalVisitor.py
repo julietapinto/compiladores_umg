@@ -159,3 +159,34 @@ class EvalVisitor(ExpresionesVisitor):
     # =========================
     def visitParentesis(self, ctx):
         return self.visit(ctx.expr())
+
+    def visitCicloWhile(self, ctx):
+        while True:
+            condicion = self.visit(ctx.condicion())
+
+            #print("Evaluando condición:", condicion, "a =", self.memoria.get("a"))
+
+            if not condicion:
+                break
+
+            for instr in ctx.bloqueInstrucciones().instrucciones():
+                self.visit(instr)
+
+        return 0
+    
+    def visitCicloFor(self, ctx):
+    # inicialización
+        print("Ejecutando inicialización...")
+        self.visit(ctx.asignacion(0))
+
+        while self.visit(ctx.condicion()):
+            
+            # ejecutar bloque
+            for instr in ctx.bloqueInstrucciones().instrucciones():
+                self.visit(instr)
+
+            # incremento
+            # print("Ejecutando incremento...")
+            self.visit(ctx.asignacion(1))
+
+        return 0

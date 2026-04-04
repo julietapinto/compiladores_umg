@@ -44,15 +44,6 @@ class ExpresionesListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ExpresionesParser#condicional.
-    def enterCondicional(self, ctx:ExpresionesParser.CondicionalContext):
-        pass
-
-    # Exit a parse tree produced by ExpresionesParser#condicional.
-    def exitCondicional(self, ctx:ExpresionesParser.CondicionalContext):
-        pass
-
-
     # Enter a parse tree produced by ExpresionesParser#cicloWhile.
     def enterCicloWhile(self, ctx:ExpresionesParser.CicloWhileContext):
         pass
@@ -62,12 +53,57 @@ class ExpresionesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ExpresionesParser#condicional.
+    def enterCondicional(self, ctx:ExpresionesParser.CondicionalContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#condicional.
+    def exitCondicional(self, ctx:ExpresionesParser.CondicionalContext):
+        pass
+
+
     # Enter a parse tree produced by ExpresionesParser#bloqueInstrucciones.
     def enterBloqueInstrucciones(self, ctx:ExpresionesParser.BloqueInstruccionesContext):
         pass
 
     # Exit a parse tree produced by ExpresionesParser#bloqueInstrucciones.
     def exitBloqueInstrucciones(self, ctx:ExpresionesParser.BloqueInstruccionesContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#condicion.
+    def enterCondicion(self, ctx:ExpresionesParser.CondicionContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#condicion.
+    def exitCondicion(self, ctx:ExpresionesParser.CondicionContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#orExpr.
+    def enterOrExpr(self, ctx:ExpresionesParser.OrExprContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#orExpr.
+    def exitOrExpr(self, ctx:ExpresionesParser.OrExprContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#andExpr.
+    def enterAndExpr(self, ctx:ExpresionesParser.AndExprContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#andExpr.
+    def exitAndExpr(self, ctx:ExpresionesParser.AndExprContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#notExpr.
+    def enterNotExpr(self, ctx:ExpresionesParser.NotExprContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#notExpr.
+    def exitNotExpr(self, ctx:ExpresionesParser.NotExprContext):
         pass
 
 
@@ -113,6 +149,15 @@ class ExpresionesListener(ParseTreeListener):
 
     # Exit a parse tree produced by ExpresionesParser#variable.
     def exitVariable(self, ctx:ExpresionesParser.VariableContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#relop.
+    def enterRelop(self, ctx:ExpresionesParser.RelopContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#relop.
+    def exitRelop(self, ctx:ExpresionesParser.RelopContext):
         pass
 
 

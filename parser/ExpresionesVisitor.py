@@ -29,6 +29,16 @@ class ExpresionesVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by ExpresionesParser#cicloWhile.
+    def visitCicloWhile(self, ctx:ExpresionesParser.CicloWhileContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExpresionesParser#cicloFor.
+    def visitCicloFor(self, ctx:ExpresionesParser.CicloForContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by ExpresionesParser#condicional.
     def visitCondicional(self, ctx:ExpresionesParser.CondicionalContext):
         return self.visitChildren(ctx)

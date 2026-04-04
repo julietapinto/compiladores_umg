@@ -22,5 +22,13 @@ EZEQUIELAQUIINICIA()[
         resultado = resultado + 100;
         bandera = 1;
     ]
+    MIENTRAS[CON a > 0] [
+        resultado = resultado + a;
+        a = a - 1;
+    ]
+    PARA [ i = 0; CON i < 5; i = i + 1 ] 
+    [
+        resultado = resultado + i;
+    ]
 ]
 EZEQUIELAQUIFINALIZA()

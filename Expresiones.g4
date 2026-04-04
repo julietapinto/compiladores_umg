@@ -15,6 +15,7 @@ instrucciones
     | asignacion SEMI
     | condicional
     | cicloWhile
+    | cicloFor
     | expr SEMI
     ;
 
@@ -30,8 +31,15 @@ asignacion
     ;
 
 
+// =========================
+// Ciclos 
+// =========================
 cicloWhile
-    : MIENTRAS '[' 'CON' condicion ']' bloqueInstrucciones
+    : MIENTRAS LBRACKET CON condicion RBRACKET bloqueInstrucciones
+    ;
+    
+cicloFor
+    : PARA LBRACKET asignacion SEMI CON condicion SEMI asignacion RBRACKET bloqueInstrucciones
     ;
 
 // =========================
@@ -140,6 +148,7 @@ NOT : '!' ;
 // LEXER
 // =========================
 MIENTRAS : 'MIENTRAS' ;
+PARA : 'PARA' ;
 ID  : [a-zA-ZáéíóúÁÉÍÓÚ_][a-zA-Z0-9_]* ;
 NUM : [0-9]+ ;
 

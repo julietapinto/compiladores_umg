@@ -44,6 +44,24 @@ class ExpresionesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ExpresionesParser#cicloWhile.
+    def enterCicloWhile(self, ctx:ExpresionesParser.CicloWhileContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#cicloWhile.
+    def exitCicloWhile(self, ctx:ExpresionesParser.CicloWhileContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#cicloFor.
+    def enterCicloFor(self, ctx:ExpresionesParser.CicloForContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#cicloFor.
+    def exitCicloFor(self, ctx:ExpresionesParser.CicloForContext):
+        pass
+
+
     # Enter a parse tree produced by ExpresionesParser#condicional.
     def enterCondicional(self, ctx:ExpresionesParser.CondicionalContext):
         pass
