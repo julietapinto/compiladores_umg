@@ -1,9 +1,8 @@
 from parser.ExpresionesVisitor import ExpresionesVisitor
 
-
 class EvalVisitor(ExpresionesVisitor):
     def __init__(self):
-        # Memoria (tabla de símbolos)
+        # Memoria (tabla de símbolos para ejecución)
         self.memoria = {}
 
     # =========================
@@ -19,13 +18,18 @@ class EvalVisitor(ExpresionesVisitor):
         return self.visitChildren(ctx)
 
     # =========================
-    # DECLARACIÓN
+    # DECLARACIÓN (MODIFICADO PARA TIPOS DE DATOS EXPLICITOS)
     # =========================
     def visitDeclaracion(self, ctx):
         nombre = ctx.ID().getText()
-        if nombre not in self.memoria:
-            self.memoria[nombre] = 0
-        return 0
+        valor = 0 # Valor por defecto
+        
+        # Si tiene una asignación inmediata (ej: int x = 10;)
+        if ctx.expr():
+            valor = self.visit(ctx.expr())
+        
+        self.memoria[nombre] = valor
+        return valor
 
     # =========================
     # ASIGNACIÓN
@@ -41,7 +45,6 @@ class EvalVisitor(ExpresionesVisitor):
     # =========================
     def visitCondicional(self, ctx):
         condicion = self.visit(ctx.condicion())
-
         bloques = ctx.bloqueInstrucciones()
 
         # IF
@@ -52,7 +55,7 @@ class EvalVisitor(ExpresionesVisitor):
         if len(bloques) == 2:
             return self.visit(bloques[1])
 
-        # TONCES (si lo usas como segundo bloque separado)
+        # TONCES (si lo usan como segundo bloque separado)
         if len(bloques) > 2:
             return self.visit(bloques[2])
 
@@ -65,38 +68,29 @@ class EvalVisitor(ExpresionesVisitor):
         return self.visitChildren(ctx)
 
     # =========================
-    # CONDICIONES LÓGICAS
+    # CONDICIONES LÓGICAS 
     # =========================
     def visitOrExpr(self, ctx):
         left = self.visit(ctx.andExpr(0))
-
         for i in range(1, len(ctx.andExpr())):
-            if left:
-                return True
+            if left: return True
             left = left or self.visit(ctx.andExpr(i))
-
         return left
 
     def visitAndExpr(self, ctx):
         left = self.visit(ctx.notExpr(0))
-
         for i in range(1, len(ctx.notExpr())):
-            if not left:
-                return False
+            if not left: return False
             left = left and self.visit(ctx.notExpr(i))
-
         return left
 
     def visitNotExpr(self, ctx):
         if ctx.NOT():
             return not self.visit(ctx.notExpr())
-
         if ctx.comparacion():
             return self.visit(ctx.comparacion())
-
         if ctx.condicion():
             return self.visit(ctx.condicion())
-
         return False
 
     # =========================
@@ -107,19 +101,12 @@ class EvalVisitor(ExpresionesVisitor):
         der = self.visit(ctx.expr(1))
         op = ctx.relop().getText()
 
-        if op == '>':
-            return izq > der
-        if op == '<':
-            return izq < der
-        if op == '==':
-            return izq == der
-        if op == '!=':
-            return izq != der
-        if op == '>=':
-            return izq >= der
-        if op == '<=':
-            return izq <= der
-
+        if op == '>': return izq > der
+        if op == '<': return izq < der
+        if op == '==': return izq == der
+        if op == '!=': return izq != der
+        if op == '>=': return izq >= der
+        if op == '<=': return izq <= der
         return False
 
     # =========================
@@ -130,32 +117,33 @@ class EvalVisitor(ExpresionesVisitor):
         der = self.visit(ctx.expr(1))
         op = ctx.getChild(1).getText()
 
-        if op == '+':
-            return izq + der
-        if op == '-':
-            return izq - der
-        if op == '*':
-            return izq * der
-        if op == '/':
-            return izq / der if der != 0 else 0
-
+        if op == '+': return izq + der
+        if op == '-': return izq - der
+        if op == '*': return izq * der
+        if op == '/': return izq / der if der != 0 else 0
         return 0
 
     # =========================
-    # NUMERO
+    # PUNTO 1: NUEVOS TIPOS DE DATOS EXPLICITOS
     # =========================
     def visitNumero(self, ctx):
         return int(ctx.NUM().getText())
 
+    def visitDecimal(self, ctx):
+        return float(ctx.DECIMAL().getText())
+
+    def visitTexto(self, ctx):
+        return ctx.STRING().getText().replace('"', '')
+
+    def visitLogico(self, ctx):
+        return ctx.BOOLEAN().getText() == 'true'
+
     # =========================
-    # VARIABLE
+    # VARIABLE / PARENTESIS
     # =========================
     def visitVariable(self, ctx):
         nombre = ctx.ID().getText()
         return self.memoria.get(nombre, 0)
 
-    # =========================
-    # PARENTESIS
-    # =========================
     def visitParentesis(self, ctx):
         return self.visit(ctx.expr())
