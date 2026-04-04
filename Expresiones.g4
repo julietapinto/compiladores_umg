@@ -14,6 +14,7 @@ instrucciones
     : declaracion SEMI
     | asignacion SEMI
     | condicional
+    | cicloWhile
     | expr SEMI
     ;
 
@@ -26,6 +27,11 @@ declaracion
 
 asignacion
     : ID ASSIGN expr
+    ;
+
+
+cicloWhile
+    : MIENTRAS '[' 'CON' condicion ']' bloqueInstrucciones
     ;
 
 // =========================
@@ -133,6 +139,7 @@ NOT : '!' ;
 // =========================
 // LEXER
 // =========================
+MIENTRAS : 'MIENTRAS' ;
 ID  : [a-zA-ZáéíóúÁÉÍÓÚ_][a-zA-Z0-9_]* ;
 NUM : [0-9]+ ;
 
