@@ -1,21 +1,29 @@
-EZEQUIELAQUIINICIA()[
-    int a = 5;
+EZEQUIELAQUIINICIA () [
+    // Función suma
+    ENTERO suma (ENTERO a, ENTERO b) [
+        RETORNA a + b;
+    ]
+
+    // Variables
     int resultado = 0;
+    int a = 5;
     int i = 0;
 
-    // =========================
+    // Llamada a función
+    resultado = suma(10, 5);
+    IMPRIMIR(resultado);
+
     // WHILE
-    // =========================
-    MIENTRAS[CON a > 0] [
+    MIENTRAS [CON a > 0] [
         resultado = resultado + a;
         a = a - 1;
     ]
 
-    // =========================
     // FOR
-    // =========================
-    PARA[i = 0; CON i < 5; i = i + 1] [
+    PARA [i = 0; CON i < 5; i = i + 1] [
         resultado = resultado + i;
     ]
+
+    IMPRIMIR(resultado);
 ]
-EZEQUIELAQUIFINALIZA()
+EZEQUIELAQUIFINALIZA ()

@@ -2,7 +2,7 @@ import sys
 from antlr4 import *
 from parser.ExpresionesLexer import ExpresionesLexer
 from parser.ExpresionesParser import ExpresionesParser
-from EvalVisitor import EvalVisitor  # Aquí importamos tu visor personalizado
+from EvalVisitor import EvalVisitor
 
 def main():
     # 1. Leer el archivo de entrada 
@@ -32,13 +32,12 @@ def main():
         visitor = EvalVisitor()
         visitor.visit(tree)
 
-    # 7. Mostrar resultados 
-    print("\n--- Resultados del Programa ---")
-    for var, val in visitor.memoria.items():
-        if isinstance(val, bool):
-            val = "true" if val else "false"
-        print(f"Variable {var} = {val}")
+        # 7. Mostrar resultados 
+        print("\n--- Resultados del Programa ---")
+        for var, val in visitor.memoria.items():
+            if isinstance(val, bool):
+                val = "true" if val else "false"
+            print(f"Variable {var} = {val}")
 
 if __name__ == '__main__':
     main()
-
