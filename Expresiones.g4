@@ -16,16 +16,27 @@ instrucciones
     | retorna SEMI
     | imprimir SEMI
     | llamadaFuncion SEMI
+    | cicloWhile
+    | cicloFor
     | expr SEMI
     ;
 // =========================
 // DECLARACION / ASIGNACION
 // =========================
 declaracion
-    : SONTAY ID
+    : (SONTAY | tipo) ID (ASSIGN expr)?
     ;
 asignacion
     : ID ASSIGN expr
+    ;
+// =========================
+// CICLOS
+// =========================
+cicloWhile
+    : MIENTRAS LBRACKET CON condicion RBRACKET bloqueInstrucciones
+    ;
+cicloFor
+    : PARA LBRACKET asignacion SEMI CON condicion SEMI asignacion RBRACKET bloqueInstrucciones
     ;
 // =========================
 // CONDICIONAL
@@ -49,7 +60,11 @@ parametros
     : tipo ID (COMMA tipo ID)*
     ;
 tipo
-    : ENTERO
+    : INT_TYPE
+    | FLOAT_TYPE
+    | STRING_TYPE
+    | BOOL_TYPE
+    | ENTERO
     | DECIMAL
     | TEXTO
     | BOOLEANO
@@ -82,6 +97,7 @@ notExpr
     : NOT notExpr
     | comparacion
     | LPAREN condicion RPAREN
+    | BOOLEAN
     ;
 comparacion
     : expr relop expr
@@ -94,6 +110,9 @@ expr
     | expr (SUM | RES) expr        #aritmetica
     | ID LPAREN argumentos? RPAREN #llamadaExpr
     | NUM                          #numero
+    | FLOAT_NUM                    #decimal
+    | STRING                       #texto
+    | BOOLEAN                      #logico
     | ID                           #variable
     | LPAREN expr RPAREN           #parentesis
     ;
@@ -101,12 +120,7 @@ expr
 // RELOP
 // =========================
 relop
-    : GT
-    | LT
-    | EQ
-    | NEQ
-    | GTE
-    | LTE
+    : GT | LT | EQ | NEQ | GTE | LTE
     ;
 // =========================
 // TOKENS KEYWORDS
@@ -114,6 +128,12 @@ relop
 PROGRAMA_INICIO : 'EZEQUIELAQUIINICIA' ;
 PROGRAMA_FIN    : 'EZEQUIELAQUIFINALIZA' ;
 SONTAY          : 'SONTAY' ;
+INT_TYPE        : 'int' ;
+FLOAT_TYPE      : 'float' ;
+STRING_TYPE     : 'string' ;
+BOOL_TYPE       : 'bool' ;
+PARA            : 'PARA' ;
+MIENTRAS        : 'MIENTRAS' ;
 CHI_LO_HACE     : 'CHI_LO_HACE' ;
 TONCES          : 'TONCES' ;
 CHI_NO          : 'CHI_NO' ;
@@ -129,13 +149,13 @@ BOOLEANO        : 'BOOLEANO' ;
 // =========================
 // SYMBOLS
 // =========================
-LPAREN  : '(' ;
-RPAREN  : ')' ;
-LBRACKET: '[' ;
-RBRACKET: ']' ;
-SEMI    : ';' ;
-ASSIGN  : '=' ;
-COMMA   : ',' ;
+LPAREN   : '(' ;
+RPAREN   : ')' ;
+LBRACKET : '[' ;
+RBRACKET : ']' ;
+SEMI     : ';' ;
+ASSIGN   : '=' ;
+COMMA    : ',' ;
 // =========================
 // OPERADORES
 // =========================
@@ -155,7 +175,10 @@ NOT : '!' ;
 // =========================
 // LEXER
 // =========================
-ID  : [a-zA-ZáéíóúÁÉÍÓÚ_][a-zA-Z0-9_]* ;
-NUM : [0-9]+ ;
-WS  : [ \t\r\n]+ -> skip ;
-COMMENT : '//' ~[\n\r]* -> skip ;
+ID       : [a-zA-ZáéíóúÁÉÍÓÚ_][a-zA-Z0-9_]* ;
+NUM      : [0-9]+ ;
+FLOAT_NUM: [0-9]+ '.' [0-9]+ ;
+STRING   : '"' (~["\r\n])* '"' ;
+BOOLEAN  : 'true' | 'false' ;
+WS       : [ \t\r\n]+ -> skip ;
+COMMENT  : '//' ~[\n\r]* -> skip ;

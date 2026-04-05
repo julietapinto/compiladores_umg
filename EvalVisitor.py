@@ -26,9 +26,9 @@ class EvalVisitor(ExpresionesVisitor):
     # =========================
     def visitDeclaracion(self, ctx):
         nombre = ctx.ID().getText()
-        if nombre not in self.memoria:
-            self.memoria[nombre] = 0
-        return 0
+        valor = self.visit(ctx.expr()) if ctx.expr() else 0
+        self.memoria[nombre] = valor
+        return valor
 
     # =========================
     # ASIGNACIÓN
@@ -49,7 +49,7 @@ class EvalVisitor(ExpresionesVisitor):
             return self.visit(bloques[0])
         if len(bloques) == 2:
             return self.visit(bloques[1])
-        if len(bloques) > 2:
+        if len(bloques) == 3:
             return self.visit(bloques[2])
         return 0
 
@@ -57,7 +57,9 @@ class EvalVisitor(ExpresionesVisitor):
     # BLOQUE
     # =========================
     def visitBloqueInstrucciones(self, ctx):
-        return self.visitChildren(ctx)
+        for instr in ctx.instrucciones():
+            self.visit(instr)
+        return 0
 
     # =========================
     # DECLARACIÓN DE FUNCIÓN
@@ -81,6 +83,7 @@ class EvalVisitor(ExpresionesVisitor):
 
     def _ejecutarFuncion(self, ctx):
         nombre = ctx.ID().getText()
+
         if nombre not in self.funciones:
             raise Exception(f"Error: función '{nombre}' no declarada.")
 
@@ -189,12 +192,47 @@ class EvalVisitor(ExpresionesVisitor):
         if op == '/': return izq / der if der != 0 else 0
         return 0
 
+    # =========================
+    # TIPOS DE DATOS
+    # =========================
     def visitNumero(self, ctx):
         return int(ctx.NUM().getText())
 
+    def visitDecimal(self, ctx):
+        return float(ctx.FLOAT_NUM().getText())
+
+    def visitTexto(self, ctx):
+        return ctx.STRING().getText().replace('"', '')
+
+    def visitLogico(self, ctx):
+        return ctx.BOOLEAN().getText() == 'true'
+
+    # =========================
+    # VARIABLE / PARENTESIS
+    # =========================
     def visitVariable(self, ctx):
         nombre = ctx.ID().getText()
         return self.memoria.get(nombre, 0)
 
     def visitParentesis(self, ctx):
         return self.visit(ctx.expr())
+
+    # =========================
+    # CICLOS
+    # =========================
+    def visitCicloWhile(self, ctx):
+        while True:
+            condicion = self.visit(ctx.condicion())
+            if not condicion:
+                break
+            for instr in ctx.bloqueInstrucciones().instrucciones():
+                self.visit(instr)
+        return 0
+
+    def visitCicloFor(self, ctx):
+        self.visit(ctx.asignacion(0))
+        while self.visit(ctx.condicion()):
+            for instr in ctx.bloqueInstrucciones().instrucciones():
+                self.visit(instr)
+            self.visit(ctx.asignacion(1))
+        return 0

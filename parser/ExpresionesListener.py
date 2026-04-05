@@ -1,4 +1,4 @@
-# Generated from Expresiones.g4 by ANTLR 4.13.1
+# Generated from Expresiones.g4 by ANTLR 4.13.2
 from antlr4 import *
 if "." in __name__:
     from .ExpresionesParser import ExpresionesParser
@@ -35,12 +35,39 @@ class ExpresionesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ExpresionesParser#tipo.
+    def enterTipo(self, ctx:ExpresionesParser.TipoContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#tipo.
+    def exitTipo(self, ctx:ExpresionesParser.TipoContext):
+        pass
+
+
     # Enter a parse tree produced by ExpresionesParser#asignacion.
     def enterAsignacion(self, ctx:ExpresionesParser.AsignacionContext):
         pass
 
     # Exit a parse tree produced by ExpresionesParser#asignacion.
     def exitAsignacion(self, ctx:ExpresionesParser.AsignacionContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#cicloWhile.
+    def enterCicloWhile(self, ctx:ExpresionesParser.CicloWhileContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#cicloWhile.
+    def exitCicloWhile(self, ctx:ExpresionesParser.CicloWhileContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#cicloFor.
+    def enterCicloFor(self, ctx:ExpresionesParser.CicloForContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#cicloFor.
+    def exitCicloFor(self, ctx:ExpresionesParser.CicloForContext):
         pass
 
 
@@ -107,6 +134,15 @@ class ExpresionesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ExpresionesParser#texto.
+    def enterTexto(self, ctx:ExpresionesParser.TextoContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#texto.
+    def exitTexto(self, ctx:ExpresionesParser.TextoContext):
+        pass
+
+
     # Enter a parse tree produced by ExpresionesParser#parentesis.
     def enterParentesis(self, ctx:ExpresionesParser.ParentesisContext):
         pass
@@ -125,6 +161,15 @@ class ExpresionesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ExpresionesParser#logico.
+    def enterLogico(self, ctx:ExpresionesParser.LogicoContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#logico.
+    def exitLogico(self, ctx:ExpresionesParser.LogicoContext):
+        pass
+
+
     # Enter a parse tree produced by ExpresionesParser#aritmetica.
     def enterAritmetica(self, ctx:ExpresionesParser.AritmeticaContext):
         pass
@@ -140,6 +185,15 @@ class ExpresionesListener(ParseTreeListener):
 
     # Exit a parse tree produced by ExpresionesParser#variable.
     def exitVariable(self, ctx:ExpresionesParser.VariableContext):
+        pass
+
+
+    # Enter a parse tree produced by ExpresionesParser#decimal.
+    def enterDecimal(self, ctx:ExpresionesParser.DecimalContext):
+        pass
+
+    # Exit a parse tree produced by ExpresionesParser#decimal.
+    def exitDecimal(self, ctx:ExpresionesParser.DecimalContext):
         pass
 
 
