@@ -1,26 +1,10 @@
-EZEQUIELAQUIINICIA()[
-    SONTAY a;
-    SONTAY b;
+EZEQUIELAQUIINICIA () [
+    ENTERO suma (ENTERO a, ENTERO b) [
+        RETORNA a + b;
+    ]
+
     SONTAY resultado;
-    SONTAY bandera;
-
-    a = 10;
-    b = 5;
-
-    CHI_LO_HACE(CON a > b && b != 0) [
-        resultado = a + b;
-        bandera = 1;
-    ] TONCES [
-        resultado = a - b;
-        bandera = 0;
-    ] CHI_NO [
-        resultado = 0;
-        bandera = 0;
-    ]
-
-    CHI_LO_HACE(CON !(a < b || b == 0)) [
-        resultado = resultado + 100;
-        bandera = 1;
-    ]
+    resultado = suma(10, 5);
+    IMPRIMIR(resultado);
 ]
-EZEQUIELAQUIFINALIZA()
+EZEQUIELAQUIFINALIZA ()

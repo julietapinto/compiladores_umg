@@ -1,4 +1,4 @@
-# Generated from Expresiones.g4 by ANTLR 4.13.1
+# Generated from Expresiones.g4 by ANTLR 4.13.2
 from antlr4 import *
 if "." in __name__:
     from .ExpresionesParser import ExpresionesParser
@@ -36,6 +36,41 @@ class ExpresionesVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by ExpresionesParser#bloqueInstrucciones.
     def visitBloqueInstrucciones(self, ctx:ExpresionesParser.BloqueInstruccionesContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExpresionesParser#decFuncion.
+    def visitDecFuncion(self, ctx:ExpresionesParser.DecFuncionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExpresionesParser#parametros.
+    def visitParametros(self, ctx:ExpresionesParser.ParametrosContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExpresionesParser#tipo.
+    def visitTipo(self, ctx:ExpresionesParser.TipoContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExpresionesParser#retorna.
+    def visitRetorna(self, ctx:ExpresionesParser.RetornaContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExpresionesParser#imprimir.
+    def visitImprimir(self, ctx:ExpresionesParser.ImprimirContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExpresionesParser#llamadaFuncion.
+    def visitLlamadaFuncion(self, ctx:ExpresionesParser.LlamadaFuncionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExpresionesParser#argumentos.
+    def visitArgumentos(self, ctx:ExpresionesParser.ArgumentosContext):
         return self.visitChildren(ctx)
 
 
@@ -81,6 +116,11 @@ class ExpresionesVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by ExpresionesParser#variable.
     def visitVariable(self, ctx:ExpresionesParser.VariableContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ExpresionesParser#llamadaExpr.
+    def visitLlamadaExpr(self, ctx:ExpresionesParser.LlamadaExprContext):
         return self.visitChildren(ctx)
 
 
