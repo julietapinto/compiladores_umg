@@ -198,6 +198,14 @@ class ExpresionesParser ( Parser ):
         def getRuleIndex(self):
             return ExpresionesParser.RULE_root
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterRoot" ):
+                listener.enterRoot(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitRoot" ):
+                listener.exitRoot(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitRoot" ):
                 return visitor.visitRoot(self)
@@ -281,6 +289,14 @@ class ExpresionesParser ( Parser ):
 
         def getRuleIndex(self):
             return ExpresionesParser.RULE_instrucciones
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterInstrucciones" ):
+                listener.enterInstrucciones(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitInstrucciones" ):
+                listener.exitInstrucciones(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitInstrucciones" ):
@@ -366,6 +382,14 @@ class ExpresionesParser ( Parser ):
         def getRuleIndex(self):
             return ExpresionesParser.RULE_declaracion
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDeclaracion" ):
+                listener.enterDeclaracion(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDeclaracion" ):
+                listener.exitDeclaracion(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDeclaracion" ):
                 return visitor.visitDeclaracion(self)
@@ -439,6 +463,14 @@ class ExpresionesParser ( Parser ):
         def getRuleIndex(self):
             return ExpresionesParser.RULE_tipo
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterTipo" ):
+                listener.enterTipo(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitTipo" ):
+                listener.exitTipo(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitTipo" ):
                 return visitor.visitTipo(self)
@@ -490,6 +522,14 @@ class ExpresionesParser ( Parser ):
 
         def getRuleIndex(self):
             return ExpresionesParser.RULE_asignacion
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAsignacion" ):
+                listener.enterAsignacion(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAsignacion" ):
+                listener.exitAsignacion(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAsignacion" ):
@@ -559,6 +599,14 @@ class ExpresionesParser ( Parser ):
 
         def getRuleIndex(self):
             return ExpresionesParser.RULE_condicional
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCondicional" ):
+                listener.enterCondicional(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCondicional" ):
+                listener.exitCondicional(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitCondicional" ):
@@ -640,6 +688,14 @@ class ExpresionesParser ( Parser ):
         def getRuleIndex(self):
             return ExpresionesParser.RULE_bloqueInstrucciones
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBloqueInstrucciones" ):
+                listener.enterBloqueInstrucciones(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBloqueInstrucciones" ):
+                listener.exitBloqueInstrucciones(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitBloqueInstrucciones" ):
                 return visitor.visitBloqueInstrucciones(self)
@@ -695,6 +751,14 @@ class ExpresionesParser ( Parser ):
         def getRuleIndex(self):
             return ExpresionesParser.RULE_condicion
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCondicion" ):
+                listener.enterCondicion(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCondicion" ):
+                listener.exitCondicion(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitCondicion" ):
                 return visitor.visitCondicion(self)
@@ -743,6 +807,14 @@ class ExpresionesParser ( Parser ):
 
         def getRuleIndex(self):
             return ExpresionesParser.RULE_orExpr
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterOrExpr" ):
+                listener.enterOrExpr(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitOrExpr" ):
+                listener.exitOrExpr(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitOrExpr" ):
@@ -805,6 +877,14 @@ class ExpresionesParser ( Parser ):
 
         def getRuleIndex(self):
             return ExpresionesParser.RULE_andExpr
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAndExpr" ):
+                listener.enterAndExpr(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAndExpr" ):
+                listener.exitAndExpr(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAndExpr" ):
@@ -878,6 +958,14 @@ class ExpresionesParser ( Parser ):
 
         def getRuleIndex(self):
             return ExpresionesParser.RULE_notExpr
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterNotExpr" ):
+                listener.enterNotExpr(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitNotExpr" ):
+                listener.exitNotExpr(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitNotExpr" ):
@@ -957,6 +1045,14 @@ class ExpresionesParser ( Parser ):
         def getRuleIndex(self):
             return ExpresionesParser.RULE_comparacion
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterComparacion" ):
+                listener.enterComparacion(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitComparacion" ):
+                listener.exitComparacion(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitComparacion" ):
                 return visitor.visitComparacion(self)
@@ -1012,6 +1108,14 @@ class ExpresionesParser ( Parser ):
         def STRING(self):
             return self.getToken(ExpresionesParser.STRING, 0)
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterTexto" ):
+                listener.enterTexto(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitTexto" ):
+                listener.exitTexto(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitTexto" ):
                 return visitor.visitTexto(self)
@@ -1033,6 +1137,14 @@ class ExpresionesParser ( Parser ):
         def RPAREN(self):
             return self.getToken(ExpresionesParser.RPAREN, 0)
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterParentesis" ):
+                listener.enterParentesis(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitParentesis" ):
+                listener.exitParentesis(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitParentesis" ):
                 return visitor.visitParentesis(self)
@@ -1049,6 +1161,14 @@ class ExpresionesParser ( Parser ):
         def NUM(self):
             return self.getToken(ExpresionesParser.NUM, 0)
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterNumero" ):
+                listener.enterNumero(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitNumero" ):
+                listener.exitNumero(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitNumero" ):
                 return visitor.visitNumero(self)
@@ -1064,6 +1184,14 @@ class ExpresionesParser ( Parser ):
 
         def BOOLEAN(self):
             return self.getToken(ExpresionesParser.BOOLEAN, 0)
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterLogico" ):
+                listener.enterLogico(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitLogico" ):
+                listener.exitLogico(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLogico" ):
@@ -1093,6 +1221,14 @@ class ExpresionesParser ( Parser ):
         def RES(self):
             return self.getToken(ExpresionesParser.RES, 0)
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAritmetica" ):
+                listener.enterAritmetica(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAritmetica" ):
+                listener.exitAritmetica(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitAritmetica" ):
                 return visitor.visitAritmetica(self)
@@ -1109,6 +1245,14 @@ class ExpresionesParser ( Parser ):
         def ID(self):
             return self.getToken(ExpresionesParser.ID, 0)
 
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterVariable" ):
+                listener.enterVariable(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitVariable" ):
+                listener.exitVariable(self)
+
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitVariable" ):
                 return visitor.visitVariable(self)
@@ -1124,6 +1268,14 @@ class ExpresionesParser ( Parser ):
 
         def DECIMAL(self):
             return self.getToken(ExpresionesParser.DECIMAL, 0)
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDecimal" ):
+                listener.enterDecimal(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDecimal" ):
+                listener.exitDecimal(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDecimal" ):
@@ -1285,6 +1437,14 @@ class ExpresionesParser ( Parser ):
 
         def getRuleIndex(self):
             return ExpresionesParser.RULE_relop
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterRelop" ):
+                listener.enterRelop(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitRelop" ):
+                listener.exitRelop(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitRelop" ):
