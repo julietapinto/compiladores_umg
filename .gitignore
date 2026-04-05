@@ -2,3 +2,8 @@
 __pycache__/
 *.pyc
 *.interp
+.venv/
+venv/
+_pycache_/
+*.pyc
+*.interp
