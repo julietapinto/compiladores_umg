@@ -1,26 +1,30 @@
-EZEQUIELAQUIINICIA()[
-    SONTAY a;
-    SONTAY b;
-    SONTAY resultado;
-    SONTAY bandera;
+EZEQUIELAQUIINICIA () [
+    // 1. Declaraciones con tipos explícitos y asignación
+    int a = 10;
+    int b = 5;
+    int resultado = 0;
+    bool bandera = false;
+    
+    // Agregamos otros tipos para demostrar que el compilador ya los reconoce
+    float pi = 3.14;
+    string estado = "Procesando";
 
-    a = 10;
-    b = 5;
-
-    CHI_LO_HACE(CON a > b && b != 0) [
+    // 2. Lógica (Condicionales y Operadores)
+    CHI_LO_HACE (CON a > b && b != 0) [
         resultado = a + b;
-        bandera = 1;
+        bandera = true;
     ] TONCES [
         resultado = a - b;
-        bandera = 0;
+        bandera = false;
     ] CHI_NO [
         resultado = 0;
-        bandera = 0;
+        bandera = false;
     ]
 
-    CHI_LO_HACE(CON !(a < b || b == 0)) [
+    CHI_LO_HACE (CON !(a < b || b == 0)) [
         resultado = resultado + 100;
-        bandera = 1;
+        bandera = true;
+        estado = "Finalizado";
     ]
     MIENTRAS[CON a > 0] [
         resultado = resultado + a;

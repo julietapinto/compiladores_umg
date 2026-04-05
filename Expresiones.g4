@@ -20,10 +20,19 @@ instrucciones
     ;
 
 // =========================
-// DECLARACION / ASIGNACION
+// DECLARACION / ASIGNACION (MODIFICADO PARA TIPOS DE DATOS EXPLICITOS)
 // =========================
+// Ahora soporta: SONTAY x; O int x = 10;
 declaracion
-    : SONTAY ID
+    : (SONTAY | tipo) ID (ASSIGN expr)? 
+    ;
+
+// Regla nueva para tipos explícitos
+tipo
+    : INT_TYPE 
+    | FLOAT_TYPE 
+    | STRING_TYPE 
+    | BOOL_TYPE
     ;
 
 asignacion
@@ -74,6 +83,7 @@ notExpr
     : NOT notExpr
     | comparacion
     | LPAREN condicion RPAREN
+    | BOOLEAN  // Soporte para true/false directo en condiciones
     ;
 
 comparacion
@@ -81,12 +91,15 @@ comparacion
     ;
 
 // =========================
-// EXPRESIONES ARITMÉTICAS
+// EXPRESIONES ARITMÉTICAS (MODIFICADO PARA TIPOS DE DATOS EXLICITOS)
 // =========================
 expr
     : expr (MUL | DIV) expr   #aritmetica
     | expr (SUM | RES) expr   #aritmetica
     | NUM                     #numero
+    | DECIMAL                 #decimal
+    | STRING                  #texto
+    | BOOLEAN                 #logico
     | ID                      #variable
     | LPAREN expr RPAREN      #parentesis
     ;
@@ -95,21 +108,24 @@ expr
 // RELOP
 // =========================
 relop
-    : GT
-    | LT
-    | EQ
-    | NEQ
-    | GTE
-    | LTE
+    : GT | LT | EQ | NEQ | GTE | LTE
     ;
 
 // =========================
-// TOKENS KEYWORDS
+// TOKENS KEYWORDS / TYPES
 // =========================
 PROGRAMA_INICIO : 'EZEQUIELAQUIINICIA' ;
 PROGRAMA_FIN    : 'EZEQUIELAQUIFINALIZA' ;
 
 SONTAY          : 'SONTAY' ;
+
+// Nuevos tipos de datos explicitos
+INT_TYPE    : 'int' ;
+FLOAT_TYPE  : 'float' ;
+STRING_TYPE : 'string' ;
+BOOL_TYPE   : 'bool' ;
+PARA : 'PARA';
+MIENTRAS : 'MIENTRAS';
 CHI_LO_HACE     : 'CHI_LO_HACE' ;
 TONCES          : 'TONCES' ;
 CHI_NO          : 'CHI_NO' ;
@@ -145,12 +161,15 @@ OR  : '||' ;
 NOT : '!' ;
 
 // =========================
-// LEXER
+// LEXER (MODIFICADO PARA TIPOS DE DATOS EXPLICITOS)
 // =========================
-MIENTRAS : 'MIENTRAS' ;
-PARA : 'PARA' ;
-ID  : [a-zA-ZáéíóúÁÉÍÓÚ_][a-zA-Z0-9_]* ;
-NUM : [0-9]+ ;
 
-WS  : [ \t\r\n]+ -> skip ;
+ID      : [a-zA-ZáéíóúÁÉÍÓÚ_][a-zA-Z0-9_]* ;
+NUM     : [0-9]+ ;
+DECIMAL : [0-9]+ '.' [0-9]+ ;
+STRING  : '"' (~["\r\n])* '"' ;
+BOOLEAN : 'true' | 'false' ;
+
+
+WS      : [ \t\r\n]+ -> skip ;
 COMMENT : '//' ~[\n\r]* -> skip ;

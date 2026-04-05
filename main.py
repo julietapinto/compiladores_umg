@@ -32,15 +32,13 @@ def main():
         visitor = EvalVisitor()
         visitor.visit(tree)
 
-        # 7. Mostrar resultados 
-        print("\n--- Resultados del Programa ---")
-        if not visitor.memoria:
-            print("No se guardaron variables.")
-        for var, val in visitor.memoria.items():
-            print(f"Variable {var} = {val}")
+    # 7. Mostrar resultados 
+    print("\n--- Resultados del Programa ---")
+    for var, val in visitor.memoria.items():
+        if isinstance(val, bool):
+            val = "true" if val else "false"
+        print(f"Variable {var} = {val}")
 
 if __name__ == '__main__':
     main()
 
-#De prueba
-#prueba 2 
