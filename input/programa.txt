@@ -1,26 +1,33 @@
-EZEQUIELAQUIINICIA()[
-    SONTAY a;
-    SONTAY b;
-    SONTAY resultado;
-    SONTAY bandera;
+EZEQUIELAQUIINICIA()
+[
+int x = 10;
+float y = 2.5;
+string s = "hola";
+int b = 0;
 
-    a = 10;
-    b = 5;
+x = x @ 3;
+y = y * 2;
 
-    CHI_LO_HACE(CON a > b && b != 0) [
-        resultado = a + b;
-        bandera = 1;
-    ] TONCES [
-        resultado = a - b;
-        bandera = 0;
-    ] CHI_NO [
-        resultado = 0;
-        bandera = 0;
-    ]
+IMPRIMIR(x);
+IMPRIMIR(y);
+IMPRIMIR(s);
+IMPRIMIR(b);
 
-    CHI_LO_HACE(CON !(a < b || b == 0)) [
-        resultado = resultado + 100;
-        bandera = 1;
-    ]
+CHI_LO_HACE(CON x > 10)
+[
+IMPRIMIR("Mayor");
 ]
+TONCES
+[
+IMPRIMIR("Menor o igual");
+]
+
+PARA [
+x = 0; CON x < 3; x = x + 1
+]
+[
+IMPRIMIR(x);
+]
+]
+
 EZEQUIELAQUIFINALIZA()
