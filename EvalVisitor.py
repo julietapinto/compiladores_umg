@@ -40,9 +40,8 @@ class EvalVisitor(ExpresionesVisitor):
         for scope in reversed(self.pila):
             if nombre in scope:
                 return scope[nombre]
-
-        raise Exception(f"Variable '{nombre}' no definida")
-
+        print(f"[ERROR SEMÁNTICO] Variable '{nombre}' no definida")
+        return 0
     # =========================
     # ROOT
     # =========================
