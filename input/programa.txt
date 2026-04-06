@@ -1,29 +1,33 @@
-EZEQUIELAQUIINICIA () [
-    // Función suma
-    ENTERO suma (ENTERO a, ENTERO b) [
-        RETORNA a + b;
-    ]
+EZEQUIELAQUIINICIA()
+[
+int x = 10;
+float y = 2.5;
+string s = "hola";
+bool b = true;
 
-    // Variables
-    int resultado = 0;
-    int a = 5;
-    int i = 0;
+x = x + 5;
+y = y * 2;
 
-    // Llamada a función
-    resultado = suma(10, 5);
-    IMPRIMIR(resultado);
+IMPRIMIR(x);
+IMPRIMIR(y);
+IMPRIMIR(s);
+IMPRIMIR(b);
 
-    // WHILE
-    MIENTRAS [CON a > 0] [
-        resultado = resultado + a;
-        a = a - 1;
-    ]
-
-    // FOR
-    PARA [i = 0; CON i < 5; i = i + 1] [
-        resultado = resultado + i;
-    ]
-
-    IMPRIMIR(resultado);
+CHI_LO_HACE(CON x > 10)
+[
+IMPRIMIR("Mayor");
 ]
-EZEQUIELAQUIFINALIZA ()
+TONCES
+[
+IMPRIMIR("Menor o igual");
+]
+
+PARA [
+x = 0; CON x < 3; x = x + 1
+]
+[
+IMPRIMIR(x);
+]
+]
+
+EZEQUIELAQUIFINALIZA()
