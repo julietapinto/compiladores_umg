@@ -109,43 +109,18 @@ class ExpresionesVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by ExpresionesParser#texto.
-    def visitTexto(self, ctx:ExpresionesParser.TextoContext):
+    # Visit a parse tree produced by ExpresionesParser#expr.
+    def visitExpr(self, ctx:ExpresionesParser.ExprContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by ExpresionesParser#parentesis.
-    def visitParentesis(self, ctx:ExpresionesParser.ParentesisContext):
+    # Visit a parse tree produced by ExpresionesParser#term.
+    def visitTerm(self, ctx:ExpresionesParser.TermContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by ExpresionesParser#numero.
-    def visitNumero(self, ctx:ExpresionesParser.NumeroContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ExpresionesParser#logico.
-    def visitLogico(self, ctx:ExpresionesParser.LogicoContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ExpresionesParser#aritmetica.
-    def visitAritmetica(self, ctx:ExpresionesParser.AritmeticaContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ExpresionesParser#variable.
-    def visitVariable(self, ctx:ExpresionesParser.VariableContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ExpresionesParser#llamadaExpr.
-    def visitLlamadaExpr(self, ctx:ExpresionesParser.LlamadaExprContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by ExpresionesParser#decimal.
-    def visitDecimal(self, ctx:ExpresionesParser.DecimalContext):
+    # Visit a parse tree produced by ExpresionesParser#factor.
+    def visitFactor(self, ctx:ExpresionesParser.FactorContext):
         return self.visitChildren(ctx)
 
 
