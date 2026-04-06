@@ -1,29 +1,49 @@
+# symbol_table.py
+
 class SymbolTable:
     def __init__(self):
-        self.stack = [{}]
+        self.pila = [{}]  # índice 0 = ámbito global
 
+    # =====================
+    # DECLARAR VARIABLE
+    # =====================
+    def declarar(self, nombre, valor):
+        if nombre in self.pila[-1]:
+            raise Exception(f"Variable '{nombre}' ya declarada en este ámbito")
+        self.pila[-1][nombre] = valor
+
+    # =====================
+    # OBTENER VALOR
+    # =====================
+    def obtener(self, nombre):
+        for scope in reversed(self.pila):
+            if nombre in scope:
+                return scope[nombre]
+        raise Exception(f"Variable '{nombre}' no definida")
+
+    # =====================
+    # ASIGNAR VALOR
+    # =====================
+    def asignar(self, nombre, valor):
+        for scope in reversed(self.pila):
+            if nombre in scope:
+                scope[nombre] = valor
+                return
+        raise Exception(f"Variable '{nombre}' no declarada")
+
+    # =====================
+    # CONTROL DE AMBITO
+    # =====================
     def push_scope(self):
-        self.stack.append({})
+        self.pila.append({})
 
     def pop_scope(self):
-        if len(self.stack) > 1:
-            self.stack.pop()
+        if len(self.pila) == 1:
+            raise Exception("No se puede eliminar el ámbito global")
+        self.pila.pop()
 
-    def declare(self, name, value=0):
-        current_scope = self.stack[-1]
-        if name in current_scope:
-            raise Exception(f"Error Semántico: La variable '{name}' ya fue declarada en este ámbito.")
-        current_scope[name] = value
-
-    def update(self, name, value):
-        for scope in reversed(self.stack):
-            if name in scope:
-                scope[name] = value
-                return
-        raise Exception(f"Error Semántico: La variable '{name}' no ha sido declarada.")
-
-    def lookup(self, name):
-        for scope in reversed(self.stack):
-            if name in scope:
-                return scope[name]
-        raise Exception(f"Error Semántico: La variable '{name}' no existe.")
+    # =====================
+    # GLOBAL
+    # =====================
+    def global_scope(self):
+        return self.pila[0]

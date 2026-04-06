@@ -63,7 +63,6 @@ tipo
     : INT_TYPE
     | FLOAT_TYPE
     | STRING_TYPE
-    | BOOL_TYPE
     ;
 retorna
     : RETORNA expr
@@ -93,7 +92,6 @@ notExpr
     : NOT notExpr
     | comparacion
     | LPAREN condicion RPAREN
-    | BOOLEAN
     ;
 comparacion
     : expr relop expr
@@ -106,7 +104,6 @@ term        : factor ((MUL | DIV) factor)* ;
 factor      : NUM
             | FLOAT_NUM
             | STRING
-            | BOOLEAN
             | ID
             | ID LPAREN argumentos? RPAREN
             | LPAREN expr RPAREN
@@ -125,7 +122,6 @@ PROGRAMA_FIN    : 'EZEQUIELAQUIFINALIZA' ;
 INT_TYPE        : 'int' ;
 FLOAT_TYPE      : 'float' ;
 STRING_TYPE     : 'string' ;
-BOOL_TYPE       : 'bool' ;
 PARA            : 'PARA' ;
 MIENTRAS        : 'MIENTRAS' ;
 CHI_LO_HACE     : 'CHI_LO_HACE' ;
@@ -169,6 +165,5 @@ ID       : [a-zA-ZáéíóúÁÉÍÓÚ_][a-zA-Z0-9_]* ;
 NUM      : [0-9]+ ;
 FLOAT_NUM: [0-9]+ '.' [0-9]+ ;
 STRING   : '"' (~["\r\n])* '"' ;
-BOOLEAN : 'true' | 'false' ;
 WS       : [ \t\r\n]+ -> skip ;
 COMMENT  : '//' ~[\n\r]* -> skip ;
