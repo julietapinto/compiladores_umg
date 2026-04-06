@@ -167,3 +167,4 @@ FLOAT_NUM: [0-9]+ '.' [0-9]+ ;
 STRING   : '"' (~["\r\n])* '"' ;
 WS       : [ \t\r\n]+ -> skip ;
 COMMENT  : '//' ~[\n\r]* -> skip ;
+ERROR_CHAR : . ;

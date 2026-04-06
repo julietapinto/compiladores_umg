@@ -3,6 +3,7 @@ from antlr4 import *
 from parser.ExpresionesLexer import ExpresionesLexer
 from parser.ExpresionesParser import ExpresionesParser
 from EvalVisitor import EvalVisitor
+from error_listener import MyErrorListener
 
 def main():
     # 1. Leer el archivo de entrada 
@@ -18,6 +19,12 @@ def main():
 
     # 3. Crear el Parser
     parser = ExpresionesParser(token_stream)
+    #  Manejo de errores personalizado
+    lexer.removeErrorListeners()
+    parser.removeErrorListeners()
+
+    lexer.addErrorListener(MyErrorListener())
+    parser.addErrorListener(MyErrorListener())
     
     # 4. Generar el árbol sintáctico empezando desde la regla 'root'
     tree = parser.root()
