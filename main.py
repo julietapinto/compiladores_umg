@@ -34,10 +34,10 @@ def main():
 
         # 7. Mostrar resultados 
         print("\n--- Resultados del Programa ---")
-        for var, val in visitor.memoria.items():
+        for var, val in visitor.pila[0].items():
             if isinstance(val, bool):
                 val = "true" if val else "false"
-            print(f"Variable {var} = {val}")
+            print(var, "=", val)
 
 if __name__ == '__main__':
     main()

@@ -8,8 +8,40 @@ class ReturnException(Exception):
 
 class EvalVisitor(ExpresionesVisitor):
     def __init__(self):
-        self.memoria = {}
+        self.pila = [{}]  # scope global
         self.funciones = {}
+
+    # =========================
+    # MANEJO DE ÁMBITOS
+    # =========================
+    def push_scope(self):
+        self.pila.append({})
+
+    def pop_scope(self):
+        self.pila.pop()
+
+    def declarar(self, nombre, valor):
+        scope_actual = self.pila[-1]
+
+        if nombre in scope_actual:
+            raise Exception(f"Variable '{nombre}' ya declarada en este ámbito")
+
+        scope_actual[nombre] = valor
+
+    def asignar(self, nombre, valor):
+        for scope in reversed(self.pila):
+            if nombre in scope:
+                scope[nombre] = valor
+                return
+
+        raise Exception(f"Variable '{nombre}' no declarada")
+
+    def obtener(self, nombre):
+        for scope in reversed(self.pila):
+            if nombre in scope:
+                return scope[nombre]
+
+        raise Exception(f"Variable '{nombre}' no definida")
 
     # =========================
     # ROOT
@@ -29,7 +61,8 @@ class EvalVisitor(ExpresionesVisitor):
     def visitDeclaracion(self, ctx):
         nombre = ctx.ID().getText()
         valor = self.visit(ctx.expr()) if ctx.expr() else 0
-        self.memoria[nombre] = valor
+
+        self.declarar(nombre, valor)
         return valor
 
     # =========================
@@ -38,7 +71,8 @@ class EvalVisitor(ExpresionesVisitor):
     def visitAsignacion(self, ctx):
         nombre = ctx.ID().getText()
         valor = self.visit(ctx.expr())
-        self.memoria[nombre] = valor
+
+        self.asignar(nombre, valor)
         return valor
 
     # =========================
@@ -55,34 +89,6 @@ class EvalVisitor(ExpresionesVisitor):
     def visitRetorna(self, ctx):
         valor = self.visit(ctx.expr())
         raise ReturnException(valor)
-
-    # =========================
-    # CONDICION
-    # =========================
-    def visitCondicion(self, ctx):
-        return self.visit(ctx.orExpr())
-
-    def visitOrExpr(self, ctx):
-        result = self.visit(ctx.andExpr(0))
-        for i in range(1, len(ctx.andExpr())):
-            result = result or self.visit(ctx.andExpr(i))
-        return result
-
-    def visitAndExpr(self, ctx):
-        result = self.visit(ctx.notExpr(0))
-        for i in range(1, len(ctx.notExpr())):
-            result = result and self.visit(ctx.notExpr(i))
-        return result
-
-    def visitNotExpr(self, ctx):
-        if ctx.NOT():
-            return not self.visit(ctx.notExpr())
-        if ctx.comparacion():
-            return self.visit(ctx.comparacion())
-        if ctx.condicion():
-            return self.visit(ctx.condicion())
-        if ctx.BOOLEAN():
-            return ctx.BOOLEAN().getText() == "true"
 
     # =========================
     # COMPARACION
@@ -143,23 +149,14 @@ class EvalVisitor(ExpresionesVisitor):
         if ctx.STRING():
             return ctx.STRING().getText().strip('"')
 
-        if ctx.BOOLEAN():
-            return ctx.BOOLEAN().getText() == "true"
-
         if ctx.ID() and ctx.getChildCount() == 1:
-            return self.memoria.get(ctx.ID().getText(), 0)
+            return self.obtener(ctx.ID().getText())
 
         if ctx.expr():
             return self.visit(ctx.expr())
 
         if ctx.llamadaFuncion():
             return self.visit(ctx.llamadaFuncion())
-
-    # =========================
-    # VARIABLES / DEFAULT
-    # =========================
-    def visitVariable(self, ctx):
-        return self.memoria.get(ctx.ID().getText(), 0)
 
     # =========================
     # CICLO WHILE
@@ -173,6 +170,7 @@ class EvalVisitor(ExpresionesVisitor):
     # =========================
     def visitCicloFor(self, ctx):
         self.visit(ctx.asignacion(0))
+
         while self.visit(ctx.condicion()):
             self.visit(ctx.bloqueInstrucciones())
             self.visit(ctx.asignacion(1))
@@ -183,9 +181,8 @@ class EvalVisitor(ExpresionesVisitor):
     def visitBloqueInstrucciones(self, ctx):
         for ins in ctx.instrucciones():
             self.visit(ins)
-
     # =========================
-    # FUNCIONES (BÁSICO)
+    # FUNCIONES
     # =========================
     def visitDecFuncion(self, ctx):
         nombre = ctx.ID().getText()
@@ -209,17 +206,18 @@ class EvalVisitor(ExpresionesVisitor):
             for p in func.parametros().ID():
                 params.append(p.getText())
 
-        backup = self.memoria.copy()
+        self.push_scope()
 
         for i, p in enumerate(params):
-            self.memoria[p] = args[i] if i < len(args) else 0
+            valor = args[i] if i < len(args) else 0
+            self.declarar(p, valor)
 
         try:
             for ins in func.instrucciones():
                 self.visit(ins)
         except ReturnException as r:
-            self.memoria = backup
+            self.pop_scope()
             return r.valor
 
-        self.memoria = backup
+        self.pop_scope()
         return None

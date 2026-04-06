@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,43,275,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,41,273,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
         7,20,2,21,7,21,2,22,7,22,2,23,7,23,1,0,1,0,1,0,1,0,1,0,4,0,54,8,
@@ -27,84 +27,83 @@ def serializedATN():
         13,3,13,196,8,13,1,13,1,13,1,14,1,14,1,14,5,14,203,8,14,10,14,12,
         14,206,9,14,1,15,1,15,1,16,1,16,1,16,5,16,213,8,16,10,16,12,16,216,
         9,16,1,17,1,17,1,17,5,17,221,8,17,10,17,12,17,224,9,17,1,18,1,18,
-        1,18,1,18,1,18,1,18,1,18,1,18,3,18,234,8,18,1,19,1,19,1,19,1,19,
-        1,20,1,20,1,20,5,20,243,8,20,10,20,12,20,246,9,20,1,21,1,21,1,21,
-        5,21,251,8,21,10,21,12,21,254,9,21,1,22,1,22,1,22,1,22,1,22,1,22,
-        1,22,1,22,3,22,264,8,22,1,22,1,22,1,22,1,22,1,22,3,22,271,8,22,1,
-        23,1,23,1,23,0,0,24,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,
-        34,36,38,40,42,44,46,0,4,1,0,3,6,1,0,26,27,1,0,24,25,1,0,28,33,286,
-        0,48,1,0,0,0,2,85,1,0,0,0,4,87,1,0,0,0,6,93,1,0,0,0,8,97,1,0,0,0,
-        10,104,1,0,0,0,12,115,1,0,0,0,14,129,1,0,0,0,16,169,1,0,0,0,18,171,
-        1,0,0,0,20,182,1,0,0,0,22,184,1,0,0,0,24,187,1,0,0,0,26,192,1,0,
-        0,0,28,199,1,0,0,0,30,207,1,0,0,0,32,209,1,0,0,0,34,217,1,0,0,0,
-        36,233,1,0,0,0,38,235,1,0,0,0,40,239,1,0,0,0,42,247,1,0,0,0,44,270,
-        1,0,0,0,46,272,1,0,0,0,48,49,5,1,0,0,49,50,5,17,0,0,50,51,5,18,0,
-        0,51,53,5,19,0,0,52,54,3,2,1,0,53,52,1,0,0,0,54,55,1,0,0,0,55,53,
-        1,0,0,0,55,56,1,0,0,0,56,57,1,0,0,0,57,58,5,20,0,0,58,59,5,2,0,0,
-        59,60,5,17,0,0,60,61,5,18,0,0,61,62,5,0,0,1,62,1,1,0,0,0,63,64,3,
-        4,2,0,64,65,5,21,0,0,65,86,1,0,0,0,66,67,3,6,3,0,67,68,5,21,0,0,
-        68,86,1,0,0,0,69,86,3,12,6,0,70,86,3,16,8,0,71,72,3,22,11,0,72,73,
-        5,21,0,0,73,86,1,0,0,0,74,75,3,24,12,0,75,76,5,21,0,0,76,86,1,0,
-        0,0,77,78,3,26,13,0,78,79,5,21,0,0,79,86,1,0,0,0,80,86,3,8,4,0,81,
-        86,3,10,5,0,82,83,3,40,20,0,83,84,5,21,0,0,84,86,1,0,0,0,85,63,1,
+        1,18,1,18,1,18,1,18,1,18,3,18,233,8,18,1,19,1,19,1,19,1,19,1,20,
+        1,20,1,20,5,20,242,8,20,10,20,12,20,245,9,20,1,21,1,21,1,21,5,21,
+        250,8,21,10,21,12,21,253,9,21,1,22,1,22,1,22,1,22,1,22,1,22,1,22,
+        3,22,262,8,22,1,22,1,22,1,22,1,22,1,22,3,22,269,8,22,1,23,1,23,1,
+        23,0,0,24,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,
+        40,42,44,46,0,4,1,0,3,5,1,0,25,26,1,0,23,24,1,0,27,32,282,0,48,1,
+        0,0,0,2,85,1,0,0,0,4,87,1,0,0,0,6,93,1,0,0,0,8,97,1,0,0,0,10,104,
+        1,0,0,0,12,115,1,0,0,0,14,129,1,0,0,0,16,169,1,0,0,0,18,171,1,0,
+        0,0,20,182,1,0,0,0,22,184,1,0,0,0,24,187,1,0,0,0,26,192,1,0,0,0,
+        28,199,1,0,0,0,30,207,1,0,0,0,32,209,1,0,0,0,34,217,1,0,0,0,36,232,
+        1,0,0,0,38,234,1,0,0,0,40,238,1,0,0,0,42,246,1,0,0,0,44,268,1,0,
+        0,0,46,270,1,0,0,0,48,49,5,1,0,0,49,50,5,16,0,0,50,51,5,17,0,0,51,
+        53,5,18,0,0,52,54,3,2,1,0,53,52,1,0,0,0,54,55,1,0,0,0,55,53,1,0,
+        0,0,55,56,1,0,0,0,56,57,1,0,0,0,57,58,5,19,0,0,58,59,5,2,0,0,59,
+        60,5,16,0,0,60,61,5,17,0,0,61,62,5,0,0,1,62,1,1,0,0,0,63,64,3,4,
+        2,0,64,65,5,20,0,0,65,86,1,0,0,0,66,67,3,6,3,0,67,68,5,20,0,0,68,
+        86,1,0,0,0,69,86,3,12,6,0,70,86,3,16,8,0,71,72,3,22,11,0,72,73,5,
+        20,0,0,73,86,1,0,0,0,74,75,3,24,12,0,75,76,5,20,0,0,76,86,1,0,0,
+        0,77,78,3,26,13,0,78,79,5,20,0,0,79,86,1,0,0,0,80,86,3,8,4,0,81,
+        86,3,10,5,0,82,83,3,40,20,0,83,84,5,20,0,0,84,86,1,0,0,0,85,63,1,
         0,0,0,85,66,1,0,0,0,85,69,1,0,0,0,85,70,1,0,0,0,85,71,1,0,0,0,85,
         74,1,0,0,0,85,77,1,0,0,0,85,80,1,0,0,0,85,81,1,0,0,0,85,82,1,0,0,
-        0,86,3,1,0,0,0,87,88,3,20,10,0,88,91,5,37,0,0,89,90,5,22,0,0,90,
-        92,3,40,20,0,91,89,1,0,0,0,91,92,1,0,0,0,92,5,1,0,0,0,93,94,5,37,
-        0,0,94,95,5,22,0,0,95,96,3,40,20,0,96,7,1,0,0,0,97,98,5,8,0,0,98,
-        99,5,19,0,0,99,100,5,12,0,0,100,101,3,30,15,0,101,102,5,20,0,0,102,
-        103,3,14,7,0,103,9,1,0,0,0,104,105,5,7,0,0,105,106,5,19,0,0,106,
-        107,3,6,3,0,107,108,5,21,0,0,108,109,5,12,0,0,109,110,3,30,15,0,
-        110,111,5,21,0,0,111,112,3,6,3,0,112,113,5,20,0,0,113,114,3,14,7,
-        0,114,11,1,0,0,0,115,116,5,9,0,0,116,117,5,17,0,0,117,118,5,12,0,
-        0,118,119,3,30,15,0,119,120,5,18,0,0,120,123,3,14,7,0,121,122,5,
-        10,0,0,122,124,3,14,7,0,123,121,1,0,0,0,123,124,1,0,0,0,124,127,
-        1,0,0,0,125,126,5,11,0,0,126,128,3,14,7,0,127,125,1,0,0,0,127,128,
-        1,0,0,0,128,13,1,0,0,0,129,131,5,19,0,0,130,132,3,2,1,0,131,130,
+        0,86,3,1,0,0,0,87,88,3,20,10,0,88,91,5,36,0,0,89,90,5,21,0,0,90,
+        92,3,40,20,0,91,89,1,0,0,0,91,92,1,0,0,0,92,5,1,0,0,0,93,94,5,36,
+        0,0,94,95,5,21,0,0,95,96,3,40,20,0,96,7,1,0,0,0,97,98,5,7,0,0,98,
+        99,5,18,0,0,99,100,5,11,0,0,100,101,3,30,15,0,101,102,5,19,0,0,102,
+        103,3,14,7,0,103,9,1,0,0,0,104,105,5,6,0,0,105,106,5,18,0,0,106,
+        107,3,6,3,0,107,108,5,20,0,0,108,109,5,11,0,0,109,110,3,30,15,0,
+        110,111,5,20,0,0,111,112,3,6,3,0,112,113,5,19,0,0,113,114,3,14,7,
+        0,114,11,1,0,0,0,115,116,5,8,0,0,116,117,5,16,0,0,117,118,5,11,0,
+        0,118,119,3,30,15,0,119,120,5,17,0,0,120,123,3,14,7,0,121,122,5,
+        9,0,0,122,124,3,14,7,0,123,121,1,0,0,0,123,124,1,0,0,0,124,127,1,
+        0,0,0,125,126,5,10,0,0,126,128,3,14,7,0,127,125,1,0,0,0,127,128,
+        1,0,0,0,128,13,1,0,0,0,129,131,5,18,0,0,130,132,3,2,1,0,131,130,
         1,0,0,0,132,133,1,0,0,0,133,131,1,0,0,0,133,134,1,0,0,0,134,135,
-        1,0,0,0,135,136,5,20,0,0,136,15,1,0,0,0,137,138,5,13,0,0,138,139,
-        3,20,10,0,139,140,5,37,0,0,140,142,5,17,0,0,141,143,3,18,9,0,142,
-        141,1,0,0,0,142,143,1,0,0,0,143,144,1,0,0,0,144,145,5,18,0,0,145,
-        147,5,19,0,0,146,148,3,2,1,0,147,146,1,0,0,0,148,149,1,0,0,0,149,
-        147,1,0,0,0,149,150,1,0,0,0,150,151,1,0,0,0,151,152,5,20,0,0,152,
-        170,1,0,0,0,153,154,5,13,0,0,154,155,5,14,0,0,155,156,5,37,0,0,156,
-        158,5,17,0,0,157,159,3,18,9,0,158,157,1,0,0,0,158,159,1,0,0,0,159,
-        160,1,0,0,0,160,161,5,18,0,0,161,163,5,19,0,0,162,164,3,2,1,0,163,
+        1,0,0,0,135,136,5,19,0,0,136,15,1,0,0,0,137,138,5,12,0,0,138,139,
+        3,20,10,0,139,140,5,36,0,0,140,142,5,16,0,0,141,143,3,18,9,0,142,
+        141,1,0,0,0,142,143,1,0,0,0,143,144,1,0,0,0,144,145,5,17,0,0,145,
+        147,5,18,0,0,146,148,3,2,1,0,147,146,1,0,0,0,148,149,1,0,0,0,149,
+        147,1,0,0,0,149,150,1,0,0,0,150,151,1,0,0,0,151,152,5,19,0,0,152,
+        170,1,0,0,0,153,154,5,12,0,0,154,155,5,13,0,0,155,156,5,36,0,0,156,
+        158,5,16,0,0,157,159,3,18,9,0,158,157,1,0,0,0,158,159,1,0,0,0,159,
+        160,1,0,0,0,160,161,5,17,0,0,161,163,5,18,0,0,162,164,3,2,1,0,163,
         162,1,0,0,0,164,165,1,0,0,0,165,163,1,0,0,0,165,166,1,0,0,0,166,
-        167,1,0,0,0,167,168,5,20,0,0,168,170,1,0,0,0,169,137,1,0,0,0,169,
-        153,1,0,0,0,170,17,1,0,0,0,171,172,3,20,10,0,172,179,5,37,0,0,173,
-        174,5,23,0,0,174,175,3,20,10,0,175,176,5,37,0,0,176,178,1,0,0,0,
+        167,1,0,0,0,167,168,5,19,0,0,168,170,1,0,0,0,169,137,1,0,0,0,169,
+        153,1,0,0,0,170,17,1,0,0,0,171,172,3,20,10,0,172,179,5,36,0,0,173,
+        174,5,22,0,0,174,175,3,20,10,0,175,176,5,36,0,0,176,178,1,0,0,0,
         177,173,1,0,0,0,178,181,1,0,0,0,179,177,1,0,0,0,179,180,1,0,0,0,
         180,19,1,0,0,0,181,179,1,0,0,0,182,183,7,0,0,0,183,21,1,0,0,0,184,
-        185,5,15,0,0,185,186,3,40,20,0,186,23,1,0,0,0,187,188,5,16,0,0,188,
-        189,5,17,0,0,189,190,3,40,20,0,190,191,5,18,0,0,191,25,1,0,0,0,192,
-        193,5,37,0,0,193,195,5,17,0,0,194,196,3,28,14,0,195,194,1,0,0,0,
-        195,196,1,0,0,0,196,197,1,0,0,0,197,198,5,18,0,0,198,27,1,0,0,0,
-        199,204,3,40,20,0,200,201,5,23,0,0,201,203,3,40,20,0,202,200,1,0,
+        185,5,14,0,0,185,186,3,40,20,0,186,23,1,0,0,0,187,188,5,15,0,0,188,
+        189,5,16,0,0,189,190,3,40,20,0,190,191,5,17,0,0,191,25,1,0,0,0,192,
+        193,5,36,0,0,193,195,5,16,0,0,194,196,3,28,14,0,195,194,1,0,0,0,
+        195,196,1,0,0,0,196,197,1,0,0,0,197,198,5,17,0,0,198,27,1,0,0,0,
+        199,204,3,40,20,0,200,201,5,22,0,0,201,203,3,40,20,0,202,200,1,0,
         0,0,203,206,1,0,0,0,204,202,1,0,0,0,204,205,1,0,0,0,205,29,1,0,0,
         0,206,204,1,0,0,0,207,208,3,32,16,0,208,31,1,0,0,0,209,214,3,34,
-        17,0,210,211,5,35,0,0,211,213,3,34,17,0,212,210,1,0,0,0,213,216,
+        17,0,210,211,5,34,0,0,211,213,3,34,17,0,212,210,1,0,0,0,213,216,
         1,0,0,0,214,212,1,0,0,0,214,215,1,0,0,0,215,33,1,0,0,0,216,214,1,
-        0,0,0,217,222,3,36,18,0,218,219,5,34,0,0,219,221,3,36,18,0,220,218,
+        0,0,0,217,222,3,36,18,0,218,219,5,33,0,0,219,221,3,36,18,0,220,218,
         1,0,0,0,221,224,1,0,0,0,222,220,1,0,0,0,222,223,1,0,0,0,223,35,1,
-        0,0,0,224,222,1,0,0,0,225,226,5,36,0,0,226,234,3,36,18,0,227,234,
-        3,38,19,0,228,229,5,17,0,0,229,230,3,30,15,0,230,231,5,18,0,0,231,
-        234,1,0,0,0,232,234,5,41,0,0,233,225,1,0,0,0,233,227,1,0,0,0,233,
-        228,1,0,0,0,233,232,1,0,0,0,234,37,1,0,0,0,235,236,3,40,20,0,236,
-        237,3,46,23,0,237,238,3,40,20,0,238,39,1,0,0,0,239,244,3,42,21,0,
-        240,241,7,1,0,0,241,243,3,42,21,0,242,240,1,0,0,0,243,246,1,0,0,
-        0,244,242,1,0,0,0,244,245,1,0,0,0,245,41,1,0,0,0,246,244,1,0,0,0,
-        247,252,3,44,22,0,248,249,7,2,0,0,249,251,3,44,22,0,250,248,1,0,
-        0,0,251,254,1,0,0,0,252,250,1,0,0,0,252,253,1,0,0,0,253,43,1,0,0,
-        0,254,252,1,0,0,0,255,271,5,38,0,0,256,271,5,39,0,0,257,271,5,40,
-        0,0,258,271,5,41,0,0,259,271,5,37,0,0,260,261,5,37,0,0,261,263,5,
-        17,0,0,262,264,3,28,14,0,263,262,1,0,0,0,263,264,1,0,0,0,264,265,
-        1,0,0,0,265,271,5,18,0,0,266,267,5,17,0,0,267,268,3,40,20,0,268,
-        269,5,18,0,0,269,271,1,0,0,0,270,255,1,0,0,0,270,256,1,0,0,0,270,
-        257,1,0,0,0,270,258,1,0,0,0,270,259,1,0,0,0,270,260,1,0,0,0,270,
-        266,1,0,0,0,271,45,1,0,0,0,272,273,7,3,0,0,273,47,1,0,0,0,21,55,
-        85,91,123,127,133,142,149,158,165,169,179,195,204,214,222,233,244,
-        252,263,270
+        0,0,0,224,222,1,0,0,0,225,226,5,35,0,0,226,233,3,36,18,0,227,233,
+        3,38,19,0,228,229,5,16,0,0,229,230,3,30,15,0,230,231,5,17,0,0,231,
+        233,1,0,0,0,232,225,1,0,0,0,232,227,1,0,0,0,232,228,1,0,0,0,233,
+        37,1,0,0,0,234,235,3,40,20,0,235,236,3,46,23,0,236,237,3,40,20,0,
+        237,39,1,0,0,0,238,243,3,42,21,0,239,240,7,1,0,0,240,242,3,42,21,
+        0,241,239,1,0,0,0,242,245,1,0,0,0,243,241,1,0,0,0,243,244,1,0,0,
+        0,244,41,1,0,0,0,245,243,1,0,0,0,246,251,3,44,22,0,247,248,7,2,0,
+        0,248,250,3,44,22,0,249,247,1,0,0,0,250,253,1,0,0,0,251,249,1,0,
+        0,0,251,252,1,0,0,0,252,43,1,0,0,0,253,251,1,0,0,0,254,269,5,37,
+        0,0,255,269,5,38,0,0,256,269,5,39,0,0,257,269,5,36,0,0,258,259,5,
+        36,0,0,259,261,5,16,0,0,260,262,3,28,14,0,261,260,1,0,0,0,261,262,
+        1,0,0,0,262,263,1,0,0,0,263,269,5,17,0,0,264,265,5,16,0,0,265,266,
+        3,40,20,0,266,267,5,17,0,0,267,269,1,0,0,0,268,254,1,0,0,0,268,255,
+        1,0,0,0,268,256,1,0,0,0,268,257,1,0,0,0,268,258,1,0,0,0,268,264,
+        1,0,0,0,269,45,1,0,0,0,270,271,7,3,0,0,271,47,1,0,0,0,21,55,85,91,
+        123,127,133,142,149,158,165,169,179,195,204,214,222,232,243,251,
+        261,268
     ]
 
 class ExpresionesParser ( Parser ):
@@ -118,21 +117,20 @@ class ExpresionesParser ( Parser ):
     sharedContextCache = PredictionContextCache()
 
     literalNames = [ "<INVALID>", "'EZEQUIELAQUIINICIA'", "'EZEQUIELAQUIFINALIZA'", 
-                     "'int'", "'float'", "'string'", "'bool'", "'PARA'", 
-                     "'MIENTRAS'", "'CHI_LO_HACE'", "'TONCES'", "'CHI_NO'", 
-                     "'CON'", "'FUNCION'", "'VACIO'", "'RETORNA'", "'IMPRIMIR'", 
-                     "'('", "')'", "'['", "']'", "';'", "'='", "','", "'*'", 
-                     "'/'", "'+'", "'-'", "'>'", "'<'", "'=='", "'!='", 
-                     "'>='", "'<='", "'&&'", "'||'", "'!'" ]
+                     "'int'", "'float'", "'string'", "'PARA'", "'MIENTRAS'", 
+                     "'CHI_LO_HACE'", "'TONCES'", "'CHI_NO'", "'CON'", "'FUNCION'", 
+                     "'VACIO'", "'RETORNA'", "'IMPRIMIR'", "'('", "')'", 
+                     "'['", "']'", "';'", "'='", "','", "'*'", "'/'", "'+'", 
+                     "'-'", "'>'", "'<'", "'=='", "'!='", "'>='", "'<='", 
+                     "'&&'", "'||'", "'!'" ]
 
     symbolicNames = [ "<INVALID>", "PROGRAMA_INICIO", "PROGRAMA_FIN", "INT_TYPE", 
-                      "FLOAT_TYPE", "STRING_TYPE", "BOOL_TYPE", "PARA", 
-                      "MIENTRAS", "CHI_LO_HACE", "TONCES", "CHI_NO", "CON", 
-                      "FUNCION", "VACIO", "RETORNA", "IMPRIMIR", "LPAREN", 
-                      "RPAREN", "LBRACKET", "RBRACKET", "SEMI", "ASSIGN", 
-                      "COMMA", "MUL", "DIV", "SUM", "RES", "GT", "LT", "EQ", 
-                      "NEQ", "GTE", "LTE", "AND", "OR", "NOT", "ID", "NUM", 
-                      "FLOAT_NUM", "STRING", "BOOLEAN", "WS", "COMMENT" ]
+                      "FLOAT_TYPE", "STRING_TYPE", "PARA", "MIENTRAS", "CHI_LO_HACE", 
+                      "TONCES", "CHI_NO", "CON", "FUNCION", "VACIO", "RETORNA", 
+                      "IMPRIMIR", "LPAREN", "RPAREN", "LBRACKET", "RBRACKET", 
+                      "SEMI", "ASSIGN", "COMMA", "MUL", "DIV", "SUM", "RES", 
+                      "GT", "LT", "EQ", "NEQ", "GTE", "LTE", "AND", "OR", 
+                      "NOT", "ID", "NUM", "FLOAT_NUM", "STRING", "WS", "COMMENT" ]
 
     RULE_root = 0
     RULE_instrucciones = 1
@@ -172,44 +170,42 @@ class ExpresionesParser ( Parser ):
     INT_TYPE=3
     FLOAT_TYPE=4
     STRING_TYPE=5
-    BOOL_TYPE=6
-    PARA=7
-    MIENTRAS=8
-    CHI_LO_HACE=9
-    TONCES=10
-    CHI_NO=11
-    CON=12
-    FUNCION=13
-    VACIO=14
-    RETORNA=15
-    IMPRIMIR=16
-    LPAREN=17
-    RPAREN=18
-    LBRACKET=19
-    RBRACKET=20
-    SEMI=21
-    ASSIGN=22
-    COMMA=23
-    MUL=24
-    DIV=25
-    SUM=26
-    RES=27
-    GT=28
-    LT=29
-    EQ=30
-    NEQ=31
-    GTE=32
-    LTE=33
-    AND=34
-    OR=35
-    NOT=36
-    ID=37
-    NUM=38
-    FLOAT_NUM=39
-    STRING=40
-    BOOLEAN=41
-    WS=42
-    COMMENT=43
+    PARA=6
+    MIENTRAS=7
+    CHI_LO_HACE=8
+    TONCES=9
+    CHI_NO=10
+    CON=11
+    FUNCION=12
+    VACIO=13
+    RETORNA=14
+    IMPRIMIR=15
+    LPAREN=16
+    RPAREN=17
+    LBRACKET=18
+    RBRACKET=19
+    SEMI=20
+    ASSIGN=21
+    COMMA=22
+    MUL=23
+    DIV=24
+    SUM=25
+    RES=26
+    GT=27
+    LT=28
+    EQ=29
+    NEQ=30
+    GTE=31
+    LTE=32
+    AND=33
+    OR=34
+    NOT=35
+    ID=36
+    NUM=37
+    FLOAT_NUM=38
+    STRING=39
+    WS=40
+    COMMENT=41
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -305,7 +301,7 @@ class ExpresionesParser ( Parser ):
                 self.state = 55 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 4260607796216) != 0)):
+                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 1030792270328) != 0)):
                     break
 
             self.state = 57
@@ -542,7 +538,7 @@ class ExpresionesParser ( Parser ):
             self.state = 91
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==22:
+            if _la==21:
                 self.state = 89
                 self.match(ExpresionesParser.ASSIGN)
                 self.state = 90
@@ -863,7 +859,7 @@ class ExpresionesParser ( Parser ):
             self.state = 123
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==10:
+            if _la==9:
                 self.state = 121
                 self.match(ExpresionesParser.TONCES)
                 self.state = 122
@@ -873,7 +869,7 @@ class ExpresionesParser ( Parser ):
             self.state = 127
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==11:
+            if _la==10:
                 self.state = 125
                 self.match(ExpresionesParser.CHI_NO)
                 self.state = 126
@@ -947,7 +943,7 @@ class ExpresionesParser ( Parser ):
                 self.state = 133 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 4260607796216) != 0)):
+                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 1030792270328) != 0)):
                     break
 
             self.state = 135
@@ -1046,7 +1042,7 @@ class ExpresionesParser ( Parser ):
                 self.state = 142
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & 120) != 0):
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & 56) != 0):
                     self.state = 141
                     self.parametros()
 
@@ -1064,7 +1060,7 @@ class ExpresionesParser ( Parser ):
                     self.state = 149 
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-                    if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 4260607796216) != 0)):
+                    if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 1030792270328) != 0)):
                         break
 
                 self.state = 151
@@ -1084,7 +1080,7 @@ class ExpresionesParser ( Parser ):
                 self.state = 158
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & 120) != 0):
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & 56) != 0):
                     self.state = 157
                     self.parametros()
 
@@ -1102,7 +1098,7 @@ class ExpresionesParser ( Parser ):
                     self.state = 165 
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-                    if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 4260607796216) != 0)):
+                    if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 1030792270328) != 0)):
                         break
 
                 self.state = 167
@@ -1179,7 +1175,7 @@ class ExpresionesParser ( Parser ):
             self.state = 179
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==23:
+            while _la==22:
                 self.state = 173
                 self.match(ExpresionesParser.COMMA)
                 self.state = 174
@@ -1215,9 +1211,6 @@ class ExpresionesParser ( Parser ):
         def STRING_TYPE(self):
             return self.getToken(ExpresionesParser.STRING_TYPE, 0)
 
-        def BOOL_TYPE(self):
-            return self.getToken(ExpresionesParser.BOOL_TYPE, 0)
-
         def getRuleIndex(self):
             return ExpresionesParser.RULE_tipo
 
@@ -1247,7 +1240,7 @@ class ExpresionesParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 182
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 120) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 56) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -1431,7 +1424,7 @@ class ExpresionesParser ( Parser ):
             self.state = 195
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 4260607688704) != 0):
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 1030792216576) != 0):
                 self.state = 194
                 self.argumentos()
 
@@ -1499,7 +1492,7 @@ class ExpresionesParser ( Parser ):
             self.state = 204
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==23:
+            while _la==22:
                 self.state = 200
                 self.match(ExpresionesParser.COMMA)
                 self.state = 201
@@ -1617,7 +1610,7 @@ class ExpresionesParser ( Parser ):
             self.state = 214
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==35:
+            while _la==34:
                 self.state = 210
                 self.match(ExpresionesParser.OR)
                 self.state = 211
@@ -1687,7 +1680,7 @@ class ExpresionesParser ( Parser ):
             self.state = 222
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==34:
+            while _la==33:
                 self.state = 218
                 self.match(ExpresionesParser.AND)
                 self.state = 219
@@ -1733,9 +1726,6 @@ class ExpresionesParser ( Parser ):
         def RPAREN(self):
             return self.getToken(ExpresionesParser.RPAREN, 0)
 
-        def BOOLEAN(self):
-            return self.getToken(ExpresionesParser.BOOLEAN, 0)
-
         def getRuleIndex(self):
             return ExpresionesParser.RULE_notExpr
 
@@ -1761,7 +1751,7 @@ class ExpresionesParser ( Parser ):
         localctx = ExpresionesParser.NotExprContext(self, self._ctx, self.state)
         self.enterRule(localctx, 36, self.RULE_notExpr)
         try:
-            self.state = 233
+            self.state = 232
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,16,self._ctx)
             if la_ == 1:
@@ -1786,12 +1776,6 @@ class ExpresionesParser ( Parser ):
                 self.condicion()
                 self.state = 230
                 self.match(ExpresionesParser.RPAREN)
-                pass
-
-            elif la_ == 4:
-                self.enterOuterAlt(localctx, 4)
-                self.state = 232
-                self.match(ExpresionesParser.BOOLEAN)
                 pass
 
 
@@ -1848,11 +1832,11 @@ class ExpresionesParser ( Parser ):
         self.enterRule(localctx, 38, self.RULE_comparacion)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 235
+            self.state = 234
             self.expr()
-            self.state = 236
+            self.state = 235
             self.relop()
-            self.state = 237
+            self.state = 236
             self.expr()
         except RecognitionException as re:
             localctx.exception = re
@@ -1916,22 +1900,22 @@ class ExpresionesParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 239
+            self.state = 238
             self.term()
-            self.state = 244
+            self.state = 243
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==26 or _la==27:
-                self.state = 240
+            while _la==25 or _la==26:
+                self.state = 239
                 _la = self._input.LA(1)
-                if not(_la==26 or _la==27):
+                if not(_la==25 or _la==26):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 241
+                self.state = 240
                 self.term()
-                self.state = 246
+                self.state = 245
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1997,22 +1981,22 @@ class ExpresionesParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 247
+            self.state = 246
             self.factor()
-            self.state = 252
+            self.state = 251
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==24 or _la==25:
-                self.state = 248
+            while _la==23 or _la==24:
+                self.state = 247
                 _la = self._input.LA(1)
-                if not(_la==24 or _la==25):
+                if not(_la==23 or _la==24):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 249
+                self.state = 248
                 self.factor()
-                self.state = 254
+                self.state = 253
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -2040,9 +2024,6 @@ class ExpresionesParser ( Parser ):
 
         def STRING(self):
             return self.getToken(ExpresionesParser.STRING, 0)
-
-        def BOOLEAN(self):
-            return self.getToken(ExpresionesParser.BOOLEAN, 0)
 
         def ID(self):
             return self.getToken(ExpresionesParser.ID, 0)
@@ -2087,64 +2068,58 @@ class ExpresionesParser ( Parser ):
         self.enterRule(localctx, 44, self.RULE_factor)
         self._la = 0 # Token type
         try:
-            self.state = 270
+            self.state = 268
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,20,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 255
+                self.state = 254
                 self.match(ExpresionesParser.NUM)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 256
+                self.state = 255
                 self.match(ExpresionesParser.FLOAT_NUM)
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 257
+                self.state = 256
                 self.match(ExpresionesParser.STRING)
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 258
-                self.match(ExpresionesParser.BOOLEAN)
+                self.state = 257
+                self.match(ExpresionesParser.ID)
                 pass
 
             elif la_ == 5:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 259
+                self.state = 258
                 self.match(ExpresionesParser.ID)
+                self.state = 259
+                self.match(ExpresionesParser.LPAREN)
+                self.state = 261
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & 1030792216576) != 0):
+                    self.state = 260
+                    self.argumentos()
+
+
+                self.state = 263
+                self.match(ExpresionesParser.RPAREN)
                 pass
 
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 260
-                self.match(ExpresionesParser.ID)
-                self.state = 261
+                self.state = 264
                 self.match(ExpresionesParser.LPAREN)
-                self.state = 263
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & 4260607688704) != 0):
-                    self.state = 262
-                    self.argumentos()
-
-
                 self.state = 265
-                self.match(ExpresionesParser.RPAREN)
-                pass
-
-            elif la_ == 7:
-                self.enterOuterAlt(localctx, 7)
-                self.state = 266
-                self.match(ExpresionesParser.LPAREN)
-                self.state = 267
                 self.expr()
-                self.state = 268
+                self.state = 266
                 self.match(ExpresionesParser.RPAREN)
                 pass
 
@@ -2210,9 +2185,9 @@ class ExpresionesParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 272
+            self.state = 270
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 16911433728) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 8455716864) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
