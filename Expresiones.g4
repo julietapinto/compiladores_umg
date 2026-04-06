@@ -24,7 +24,7 @@ instrucciones
 // DECLARACION / ASIGNACION
 // =========================
 declaracion
-    : (SONTAY | tipo) ID (ASSIGN expr)?
+    : tipo ID (ASSIGN expr)?
     ;
 asignacion
     : ID ASSIGN expr
@@ -53,8 +53,8 @@ bloqueInstrucciones
 // FUNCIONES Y PROCEDIMIENTOS
 // =========================
 decFuncion
-    : tipo ID LPAREN parametros? RPAREN LBRACKET instrucciones+ RBRACKET
-    | VACIO ID LPAREN parametros? RPAREN LBRACKET instrucciones+ RBRACKET
+    : FUNCION tipo ID LPAREN parametros? RPAREN LBRACKET instrucciones+ RBRACKET
+    | FUNCION VACIO ID LPAREN parametros? RPAREN LBRACKET instrucciones+ RBRACKET
     ;
 parametros
     : tipo ID (COMMA tipo ID)*
@@ -64,10 +64,6 @@ tipo
     | FLOAT_TYPE
     | STRING_TYPE
     | BOOL_TYPE
-    | ENTERO
-    | DECIMAL
-    | TEXTO
-    | BOOLEANO
     ;
 retorna
     : RETORNA expr
@@ -105,17 +101,16 @@ comparacion
 // =========================
 // EXPRESIONES ARITMÉTICAS
 // =========================
-expr
-    : expr (MUL | DIV) expr        #aritmetica
-    | expr (SUM | RES) expr        #aritmetica
-    | ID LPAREN argumentos? RPAREN #llamadaExpr
-    | NUM                          #numero
-    | FLOAT_NUM                    #decimal
-    | STRING                       #texto
-    | BOOLEAN                      #logico
-    | ID                           #variable
-    | LPAREN expr RPAREN           #parentesis
-    ;
+expr        : term ((SUM | RES) term)* ;
+term        : factor ((MUL | DIV) factor)* ;
+factor      : NUM
+            | FLOAT_NUM
+            | STRING
+            | BOOLEAN
+            | ID
+            | ID LPAREN argumentos? RPAREN
+            | LPAREN expr RPAREN
+            ;
 // =========================
 // RELOP
 // =========================
@@ -127,7 +122,6 @@ relop
 // =========================
 PROGRAMA_INICIO : 'EZEQUIELAQUIINICIA' ;
 PROGRAMA_FIN    : 'EZEQUIELAQUIFINALIZA' ;
-SONTAY          : 'SONTAY' ;
 INT_TYPE        : 'int' ;
 FLOAT_TYPE      : 'float' ;
 STRING_TYPE     : 'string' ;
@@ -142,10 +136,6 @@ FUNCION         : 'FUNCION' ;
 VACIO           : 'VACIO' ;
 RETORNA         : 'RETORNA' ;
 IMPRIMIR        : 'IMPRIMIR' ;
-ENTERO          : 'ENTERO' ;
-DECIMAL         : 'DECIMAL' ;
-TEXTO           : 'TEXTO' ;
-BOOLEANO        : 'BOOLEANO' ;
 // =========================
 // SYMBOLS
 // =========================
@@ -179,6 +169,6 @@ ID       : [a-zA-ZáéíóúÁÉÍÓÚ_][a-zA-Z0-9_]* ;
 NUM      : [0-9]+ ;
 FLOAT_NUM: [0-9]+ '.' [0-9]+ ;
 STRING   : '"' (~["\r\n])* '"' ;
-BOOLEAN  : 'true' | 'false' ;
+BOOLEAN : 'true' | 'false' ;
 WS       : [ \t\r\n]+ -> skip ;
 COMMENT  : '//' ~[\n\r]* -> skip ;
