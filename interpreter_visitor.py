@@ -1,4 +1,5 @@
 from parser.ExpresionesVisitor import ExpresionesVisitor
+from symbol_table import SymbolTable
 
 
 class ReturnException(Exception):
@@ -8,40 +9,9 @@ class ReturnException(Exception):
 
 class EvalVisitor(ExpresionesVisitor):
     def __init__(self):
-        self.pila = [{}]  # scope global
+        self.symbols = SymbolTable()
         self.funciones = {}
 
-    # =========================
-    # MANEJO DE ÁMBITOS
-    # =========================
-    def push_scope(self):
-        self.pila.append({})
-
-    def pop_scope(self):
-        self.pila.pop()
-
-    def declarar(self, nombre, valor):
-        scope_actual = self.pila[-1]
-
-        if nombre in scope_actual:
-            raise Exception(f"Variable '{nombre}' ya declarada en este ámbito")
-
-        scope_actual[nombre] = valor
-
-    def asignar(self, nombre, valor):
-        for scope in reversed(self.pila):
-            if nombre in scope:
-                scope[nombre] = valor
-                return
-
-        raise Exception(f"Variable '{nombre}' no declarada")
-
-    def obtener(self, nombre):
-        for scope in reversed(self.pila):
-            if nombre in scope:
-                return scope[nombre]
-        print(f"[ERROR SEMÁNTICO] Variable '{nombre}' no definida")
-        return 0
     # =========================
     # ROOT
     # =========================
@@ -61,7 +31,7 @@ class EvalVisitor(ExpresionesVisitor):
         nombre = ctx.ID().getText()
         valor = self.visit(ctx.expr()) if ctx.expr() else 0
 
-        self.declarar(nombre, valor)
+        self.symbols.declarar(nombre, valor)
         return valor
 
     # =========================
@@ -71,7 +41,7 @@ class EvalVisitor(ExpresionesVisitor):
         nombre = ctx.ID().getText()
         valor = self.visit(ctx.expr())
 
-        self.asignar(nombre, valor)
+        self.symbols.asignar(nombre, valor)
         return valor
 
     # =========================
@@ -111,7 +81,7 @@ class EvalVisitor(ExpresionesVisitor):
             return izq <= der
 
     # =========================
-    # EXPRESIONES ARITMETICAS
+    # EXPRESIONES
     # =========================
     def visitExpr(self, ctx):
         result = self.visit(ctx.term(0))
@@ -149,7 +119,7 @@ class EvalVisitor(ExpresionesVisitor):
             return ctx.STRING().getText().strip('"')
 
         if ctx.ID() and ctx.getChildCount() == 1:
-            return self.obtener(ctx.ID().getText())
+            return self.symbols.obtener(ctx.ID().getText())
 
         if ctx.expr():
             return self.visit(ctx.expr())
@@ -180,6 +150,7 @@ class EvalVisitor(ExpresionesVisitor):
     def visitBloqueInstrucciones(self, ctx):
         for ins in ctx.instrucciones():
             self.visit(ins)
+
     # =========================
     # FUNCIONES
     # =========================
@@ -205,18 +176,18 @@ class EvalVisitor(ExpresionesVisitor):
             for p in func.parametros().ID():
                 params.append(p.getText())
 
-        self.push_scope()
+        self.symbols.push_scope()
 
         for i, p in enumerate(params):
             valor = args[i] if i < len(args) else 0
-            self.declarar(p, valor)
+            self.symbols.declarar(p, valor)
 
         try:
             for ins in func.instrucciones():
                 self.visit(ins)
         except ReturnException as r:
-            self.pop_scope()
+            self.symbols.pop_scope()
             return r.valor
 
-        self.pop_scope()
+        self.symbols.pop_scope()
         return None
