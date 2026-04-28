@@ -1,4 +1,5 @@
 import sys
+import traceback
 from antlr4 import *
 from parser.ExpresionesLexer import ExpresionesLexer
 from parser.ExpresionesParser import ExpresionesParser
@@ -23,39 +24,43 @@ def main():
 
     lexer.removeErrorListeners()
     parser.removeErrorListeners()
-
     lexer.addErrorListener(MyErrorListener())
     parser.addErrorListener(MyErrorListener())
 
     # 4. Árbol
     tree = parser.root()
 
-    # Validación semántica
-    semantic = SemanticVisitor()
+    # 5. Validar errores sintácticos
+    if parser.getNumberOfSyntaxErrors() > 0:
+        print("El programa tiene errores de sintaxis. Deteniendo pipeline.")
+        return
 
+    print("Análisis sintáctico exitoso.")
+
+    # 6. Análisis semántico
+    semantic = SemanticVisitor()
     try:
         semantic.visit(tree)
+        print("Análisis semántico exitoso.")
     except Exception as e:
         print(e)
         return
 
-    # 5. Validar errores
-    if parser.getNumberOfSyntaxErrors() > 0:
-        print("El programa tiene errores de sintaxis.")
-    else:
-        print("Análisis sintáctico exitoso. Ejecutando programa...")
-
-        # 6. Ejecutar visitor
-        visitor = EvalVisitor()
+    # 7. Ejecutar visitor intérprete
+    print("Ejecutando programa...")
+    visitor = EvalVisitor()
+    try:
         visitor.visit(tree)
+    except Exception as e:
+        traceback.print_exc()
+        return
 
-        # 7. Resultados
-        print("\n--- Resultados del Programa ---")
-        for var, val in visitor.symbols.pila[0].items():
-            if isinstance(val, bool):
-                val = "true" if val else "false"
-            print(var, "=", val)
-
+    # 8. Resultados
+    print("\n--- Resultados del Programa ---")
+    for var, val in visitor.symbols.pila[0].items():
+        if isinstance(val, bool):
+            val = "true" if val else "false"
+        print(var, "=", val)
 
 if __name__ == '__main__':
     main()

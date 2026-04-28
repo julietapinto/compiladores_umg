@@ -74,6 +74,11 @@ class ExpresionesVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by ExpresionesParser#importStmt.
+    def visitImportStmt(self, ctx:ExpresionesParser.ImportStmtContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by ExpresionesParser#llamadaFuncion.
     def visitLlamadaFuncion(self, ctx:ExpresionesParser.LlamadaFuncionContext):
         return self.visitChildren(ctx)
