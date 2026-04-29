@@ -16,8 +16,11 @@ instrucciones
     | retorna SEMI
     | imprimir SEMI
     | llamadaFuncion SEMI
+    | importStmt
     | cicloWhile
     | cicloFor
+    | BREAK SEMI
+    | CONTINUE SEMI
     | expr SEMI
     ;
 // =========================
@@ -25,9 +28,11 @@ instrucciones
 // =========================
 declaracion
     : tipo ID (ASSIGN expr)?
+    | tipo ID LBRACKET NUM RBRACKET
     ;
 asignacion
     : ID ASSIGN expr
+    | ID LBRACKET expr RBRACKET ASSIGN expr
     ;
 // =========================
 // CICLOS
@@ -70,6 +75,9 @@ retorna
 imprimir
     : IMPRIMIR LPAREN expr RPAREN
     ;
+importStmt
+    : IMPORT STRING SEMI
+    ;
 llamadaFuncion
     : ID LPAREN argumentos? RPAREN
     ;
@@ -99,13 +107,14 @@ comparacion
 // =========================
 // EXPRESIONES ARITMÉTICAS
 // =========================
-expr        : term ((SUM | RES) term)* ;
-term        : factor ((MUL | DIV) factor)* ;
+expr : term ((SUM | RES) term)* ;
+term : factor ((MUL | DIV | MOD) factor)* ;
 factor      : NUM
             | FLOAT_NUM
             | STRING
             | ID
             | ID LPAREN argumentos? RPAREN
+            | ID LBRACKET expr RBRACKET 
             | LPAREN expr RPAREN
             ;
 // =========================
@@ -132,6 +141,9 @@ FUNCION         : 'FUNCION' ;
 VACIO           : 'VACIO' ;
 RETORNA         : 'RETORNA' ;
 IMPRIMIR        : 'IMPRIMIR' ;
+BREAK           : 'BREAK' ;
+CONTINUE        : 'CONTINUE' ;
+IMPORT          : 'IMPORT' ;
 // =========================
 // SYMBOLS
 // =========================
@@ -147,6 +159,7 @@ COMMA    : ',' ;
 // =========================
 MUL : '*' ;
 DIV : '/' ;
+MOD : '%' ;
 SUM : '+' ;
 RES : '-' ;
 GT  : '>' ;
@@ -167,4 +180,6 @@ FLOAT_NUM: [0-9]+ '.' [0-9]+ ;
 STRING   : '"' (~["\r\n])* '"' ;
 WS       : [ \t\r\n]+ -> skip ;
 COMMENT  : '//' ~[\n\r]* -> skip ;
-ERROR_CHAR : . ;
+ERROR_CHAR 
+    : . { print(f"[ERROR LÉXICO] símbolo inválido: {self.text}") } -> skip
+    ;

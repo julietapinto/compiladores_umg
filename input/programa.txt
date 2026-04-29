@@ -1,33 +1,29 @@
-EZEQUIELAQUIINICIA()
-[
-int x = 10;
-float y = 2.5;
-string s = "hola";
-int b = 0;
+EZEQUIELAQUIINICIA () [
+    string saludo = "Hola";
+    string nombre = " Mundo";
+    string completo = "vacio";
+    completo = saludo + nombre;
+    IMPRIMIR(completo);
 
-x = x + 3;
-y = y * 2;
+    int arr[3];
+    arr[0] = 10;
+    arr[1] = 20;
+    arr[2] = 30;
+    IMPRIMIR(arr[0]);
+    IMPRIMIR(arr[1]);
 
-IMPRIMIR(x);
-IMPRIMIR(y);
-IMPRIMIR(s);
-IMPRIMIR(b);
+    int x = 10;
+    int mod = 0;
+    mod = x % 3;
+    IMPRIMIR(mod);
 
-CHI_LO_HACE(CON x > 10)
-[
-IMPRIMIR("Mayor");
+    int i = 0;
+    MIENTRAS [CON i < 10] [
+        CHI_LO_HACE (CON i == 3) [
+            BREAK;
+        ]
+        IMPRIMIR(i);
+        i = i + 1;
+    ]
 ]
-TONCES
-[
-IMPRIMIR("Menor o igual");
-]
-
-PARA [
-x = 0; CON x < 3; x = x + 1
-]
-[
-IMPRIMIR(x);
-]
-]
-
-EZEQUIELAQUIFINALIZA()
+EZEQUIELAQUIFINALIZA ()
