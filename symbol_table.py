@@ -24,3 +24,14 @@ class SymbolTable:
             if nombre in scope:
                 return scope[nombre]
         raise Exception(f"[ERROR] Variable '{nombre}' no existe")
+
+    def imprimir_tabla(self):
+        print("\n===== TABLA DE SÍMBOLOS (EJECUCIÓN) =====")
+        for nivel, scope in enumerate(self.pila):
+            print(f"\nScope {nivel}:")
+            if not scope:
+                print("  (vacío)")
+            for nombre, valor in scope.items():
+                if isinstance(valor, bool):
+                    valor = "true" if valor else "false"
+                print(f"  {nombre} -> {repr(valor)}")

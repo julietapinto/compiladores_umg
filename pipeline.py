@@ -1,5 +1,6 @@
 import sys
 import traceback
+import symbol_table
 from antlr4 import *
 from parser.ExpresionesLexer import ExpresionesLexer
 from parser.ExpresionesParser import ExpresionesParser
@@ -41,6 +42,18 @@ def main():
     semantic = SemanticVisitor()
     try:
         semantic.visit(tree)
+        if len(semantic.errores) == 0:
+            print("No hay errores semánticos.")
+        else:
+            for error in semantic.errores:
+                print(error)
+
+        # Mostrar tabla de símbolos
+        semantic.imprimir_tabla()
+        if len(semantic.errores) > 0:
+            print("\nSe encontraron errores semánticos. No se ejecuta el programa.")
+            return
+
         print("Análisis semántico exitoso.")
     except Exception as e:
         print(e)
@@ -62,5 +75,9 @@ def main():
             val = "true" if val else "false"
         print(var, "=", val)
 
+    # 9. Mostrar tabla de símbolos de ejecución
+    visitor.symbols.imprimir_tabla()
+    
+    
 if __name__ == '__main__':
     main()
