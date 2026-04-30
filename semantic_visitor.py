@@ -1,33 +1,32 @@
 from parser.ExpresionesVisitor import ExpresionesVisitor
 from Simbolo import Simbolo
+from symbol_table import SymbolTable
 
 class SemanticVisitor(ExpresionesVisitor):
     def __init__(self):
-        self.pila = [{}]
+        self.tabla = SymbolTable()
         self.funciones = {}
         self.current_function = None
         self.in_loop = 0
         self.errores = []
 
     def push_scope(self):
-        self.pila.append({})
+        self.tabla.push_scope()
 
     def pop_scope(self):
-        self.pila.pop()
+        self.tabla.pop_scope()
 
     def declarar(self, nombre, tipo, valor=None):
-        scope = self.pila[-1]
-
-        if nombre in scope:
+        if nombre in self.tabla.pila[-1]:
             self.errores.append(f"[ERROR SEMÁNTICO] Variable '{nombre}' ya declarada")
             return
 
-        # Detectar arrays
+        # 👇 AGREGA ESTO
         if "[]" in tipo:
             tipo_base = tipo.replace("[]", "")
             tipo = {"tipo": "array", "subtipo": tipo_base}
 
-        scope[nombre] = Simbolo(nombre, tipo, valor)
+        self.tabla.pila[-1][nombre] = Simbolo(nombre, tipo, valor)
 
     def tipos_compatibles(self, t1, t2):
         return t1 == t2
@@ -39,7 +38,7 @@ class SemanticVisitor(ExpresionesVisitor):
         if not simbolo:
             raise Exception("[ERROR] Array no declarado")
 
-        if simbolo.tipo != "array":
+        if not isinstance(simbolo.tipo, dict) or simbolo.tipo.get("tipo") != "array":
             raise Exception("[ERROR] No es un array")
 
         index_tipo = self.visit(ctx.expr())
@@ -53,7 +52,7 @@ class SemanticVisitor(ExpresionesVisitor):
         print("\n===== TABLA DE SÍMBOLOS =====")
 
         nivel = 0
-        for scope in self.pila:
+        for scope in self.tabla.pila:
             print(f"\nScope {nivel}:")
             if not scope:
                 print("  (vacío)")
@@ -70,13 +69,13 @@ class SemanticVisitor(ExpresionesVisitor):
     #         raise Exception(f"[ERROR SEMÁNTICO] Variable '{nombre}' ya declarada")
     #     scope[nombre] = True
     def buscar(self, nombre):
-        for scope in reversed(self.pila):
+        for scope in reversed(self.tabla.pila):
             if nombre in scope:
                 return scope[nombre]
         return None
 
     def existe(self, nombre):
-        for scope in reversed(self.pila):
+        for scope in reversed(self.tabla.pila):
             if nombre in scope:
                 return True
         return False
@@ -228,7 +227,7 @@ class SemanticVisitor(ExpresionesVisitor):
                 else:
                     self.errores.append("[ERROR SEMÁNTICO] Operación '+' inválida para estos tipos")
                     result_type = None
-            elif ctx.SUB(i - 1):
+            elif ctx.RES(i - 1):
                 if result_type in ["int", "float"] and right in ["int", "float"]:
                     result_type = "float" if "float" in [result_type, right] else "int"
                 else:
@@ -318,9 +317,10 @@ class SemanticVisitor(ExpresionesVisitor):
     def visitComparacion(self, ctx):
         self.visit(ctx.expr(0))
         self.visit(ctx.expr(1))
-
+        return "bool"
+    
     def visitImprimir(self, ctx):
-        self.visit(ctx.expr())
+        return self.visit(ctx.expr())
 
     def visitRetorna(self, ctx):
         if self.current_function is None:
