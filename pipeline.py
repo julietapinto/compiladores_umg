@@ -37,14 +37,14 @@ def main():
 
     # 4. Árbol sintáctico
     tree = parser.root()
-
+    print("\n===== FASE 1: ANÁLISIS SINTÁCTICO =====")
     # 5. Validar errores sintácticos
     if parser.getNumberOfSyntaxErrors() > 0:
         print("El programa tiene errores de sintaxis. Deteniendo pipeline.")
         return
 
     print("Análisis sintáctico exitoso.")
-
+    print("\n===== FASE 2: ANÁLISIS SEMÁNTICO =====")
     # 6. Análisis semántico
     semantic = SemanticVisitor()
     try:
@@ -68,6 +68,7 @@ def main():
     # =========================
     # 7. GENERAR TAC
     # =========================
+    print("\n===== FASE 3: GENERACIÓN TAC =====")
     print("\nGenerando código TAC...")
 
     tac = TACGenerator()
@@ -90,6 +91,7 @@ def main():
     # =========================
     # 8. INTERPRETAR
     # =========================
+    print("\n===== FASE 4: EJECUCIÓN =====")
     print("\nEjecutando programa...")
     visitor = EvalVisitor()
 
