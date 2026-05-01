@@ -15,9 +15,9 @@ from tac_generator import TACGenerator
 def main():
     # 1. Leer archivo
     try:
-        input_stream = FileStream("input/programa.txt", encoding='utf-8')
+        input_stream = FileStream("input/Entrada_errorSemantic.src", encoding='utf-8')
     except FileNotFoundError:
-        print("Error: No se encontró el archivo 'programa.txt'")
+        print("Error: No se encontró el archivo 'Entrada_errorSemantic.src'")
         return
 
     # 2. Lexer
