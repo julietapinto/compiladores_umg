@@ -11,7 +11,8 @@ from interpreter_visitor import EvalVisitor
 from custom_errors import MyErrorListener
 from semantic_visitor import SemanticVisitor
 from tac_generator import TACGenerator
-
+from ir_generator import IRGenerator
+from llvmlite import ir
 
 def main():
     inicio = time.time()  # inicio medición
@@ -87,6 +88,29 @@ def main():
         f.write(codigo_tac)
 
     print("Archivo TAC generado en output/programa.tac")
+
+    # =========================
+    # 7.1. GENERAR LLVM IR
+    # =========================
+    print("\nGenerando código LLVM IR...")
+
+    ir_gen = IRGenerator()
+    ir_gen.create_main()
+
+    #  EJEMPLO BÁSICO (luego lo conectas al AST)
+    # Aquí solo probamos que funcione
+    ir_gen.declare_variable("x", 10)
+
+    x = ir_gen.load_variable("x")
+    res = ir_gen.add(x, ir.Constant(ir.IntType(32), 5))
+
+    ir_gen.finish()
+
+    # Guardar archivo
+    with open("output/programa.ll", "w") as f:
+        f.write(str(ir_gen.module))
+
+    print("Archivo LLVM IR generado en output/programa.ll")
 
     # =========================
     # 8. INTERPRETAR
