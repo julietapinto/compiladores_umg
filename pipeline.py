@@ -1,6 +1,7 @@
 import sys
 import traceback
 import os
+import time  
 
 from antlr4 import *
 from parser.ExpresionesLexer import ExpresionesLexer
@@ -13,11 +14,13 @@ from tac_generator import TACGenerator
 
 
 def main():
+    inicio = time.time()  # inicio medición
+
     # 1. Leer archivo
     try:
-        input_stream = FileStream("input/Entrada_errorSemantic.src", encoding='utf-8')
+        input_stream = FileStream("input/Entrada_valida1.src", encoding='utf-8')
     except FileNotFoundError:
-        print("Error: No se encontró el archivo 'Entrada_errorSemantic.src'")
+        print("Error: No se encontró el archivo 'Entrada_valida1.src'")
         return
 
     # 2. Lexer
@@ -76,7 +79,7 @@ def main():
     print(codigo_tac)
 
     # Crear carpeta output automáticamente
-    os.makedirs("output", exist_ok=True)
+    os.makedirs("output", exist_ok=True)  # punto 1
 
     # Guardar archivo .tac
     with open("output/programa.tac", "w") as f:
@@ -105,6 +108,9 @@ def main():
 
     # 10. Tabla final
     visitor.symbols.imprimir_tabla()
+
+    fin = time.time()  # fin medición
+    print(f"\nTiempo de ejecución: {fin - inicio:.4f} segundos")  # punto 2
 
 
 if __name__ == '__main__':
