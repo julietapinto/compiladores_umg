@@ -5,7 +5,7 @@ float y = 2.5;
 string s = "hola";
 int b = 0;
 
-x = x @ 3;
+x = x + 3
 y = y * 2;
 
 IMPRIMIR(x);
