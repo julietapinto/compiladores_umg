@@ -138,6 +138,8 @@ def main():
     fin = time.time()  # fin medición
     print(f"\nTiempo de ejecución: {fin - inicio:.4f} segundos")  # punto 2
 
+def run_pipeline():
+        main()
 
 if __name__ == '__main__':
     main()
