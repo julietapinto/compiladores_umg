@@ -1,13 +1,16 @@
 import sys
 import traceback
-import symbol_table
+import os
+
 from antlr4 import *
 from parser.ExpresionesLexer import ExpresionesLexer
 from parser.ExpresionesParser import ExpresionesParser
+
 from interpreter_visitor import EvalVisitor
 from custom_errors import MyErrorListener
 from semantic_visitor import SemanticVisitor
 from tac_generator import TACGenerator
+
 
 def main():
     # 1. Leer archivo
@@ -17,7 +20,7 @@ def main():
         print("Error: No se encontró el archivo 'programa.txt'")
         return
 
-    # 2. Lexer y tokens
+    # 2. Lexer
     lexer = ExpresionesLexer(input_stream)
     token_stream = CommonTokenStream(lexer)
 
@@ -29,7 +32,7 @@ def main():
     lexer.addErrorListener(MyErrorListener())
     parser.addErrorListener(MyErrorListener())
 
-    # 4. Árbol
+    # 4. Árbol sintáctico
     tree = parser.root()
 
     # 5. Validar errores sintácticos
@@ -43,58 +46,66 @@ def main():
     semantic = SemanticVisitor()
     try:
         semantic.visit(tree)
-        if len(semantic.errores) == 0:
-            print("No hay errores semánticos.")
-        else:
+
+        if len(semantic.errores) > 0:
             for error in semantic.errores:
                 print(error)
 
-        # Mostrar tabla de símbolos
-        semantic.imprimir_tabla()
-        if len(semantic.errores) > 0:
-            print("\nSe encontraron errores semánticos. No se ejecuta el programa.")
+            print("\nSe encontraron errores semánticos. Deteniendo pipeline.")
             return
 
+        print("No hay errores semánticos.")
+        semantic.imprimir_tabla()
         print("Análisis semántico exitoso.")
 
-        # 7. Generar TAC
-        print("\nGenerando código TAC...")
-        tac = TACGenerator()
-        tac.visit(tree)
-
-        codigo_tac = tac.obtener_codigo()
-
-        print("\n===== TAC =====")
-        print(codigo_tac)
-
-        with open("output/programa.tac", "w") as f:
-            f.write(codigo_tac)
-
-        print("Archivo TAC generado en output/programa.tac")
-        
     except Exception as e:
         print(e)
         return
 
-    # 7. Ejecutar visitor intérprete
-    print("Ejecutando programa...")
+    # =========================
+    # 7. GENERAR TAC
+    # =========================
+    print("\nGenerando código TAC...")
+
+    tac = TACGenerator()
+    tac.visit(tree)
+
+    codigo_tac = tac.obtener_codigo()
+
+    print("\n===== TAC =====")
+    print(codigo_tac)
+
+    # Crear carpeta output automáticamente
+    os.makedirs("output", exist_ok=True)
+
+    # Guardar archivo .tac
+    with open("output/programa.tac", "w") as f:
+        f.write(codigo_tac)
+
+    print("Archivo TAC generado en output/programa.tac")
+
+    # =========================
+    # 8. INTERPRETAR
+    # =========================
+    print("\nEjecutando programa...")
     visitor = EvalVisitor()
+
     try:
         visitor.visit(tree)
     except Exception as e:
         traceback.print_exc()
         return
 
-    # 8. Resultados
+    # 9. Resultados
     print("\n--- Resultados del Programa ---")
     for var, val in visitor.symbols.pila[0].items():
         if isinstance(val, bool):
             val = "true" if val else "false"
         print(var, "=", val)
 
-    # 9. Mostrar tabla de símbolos de ejecución
+    # 10. Tabla final
     visitor.symbols.imprimir_tabla()
-    
-    
+
+
 if __name__ == '__main__':
     main()
