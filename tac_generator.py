@@ -135,3 +135,20 @@ class TACGenerator(ExpresionesVisitor):
         temp = self.new_temp()
         self.agregar(f"{temp} = {izq} {op} {der}")
         return temp
+if __name__ == "__main__":
+    # Prueba rápida 
+    gen = TACGenerator()
+    
+    # Simulamos una operación aritmética y un IF
+    gen.agregar("// --- Ejemplo de Aritmética ---")
+    gen.agregar("t1 = 5 * 2")
+    gen.agregar("x = 10 + t1")
+    
+    gen.agregar("\n// --- Ejemplo de Condicional ---")
+    gen.agregar("if x > 10 goto L1")
+    gen.agregar("goto L2")
+    gen.agregar("L1:")
+    gen.agregar("   IMPRIMIR(x)")
+    gen.agregar("L2:")
+    
+    print(gen.obtener_codigo())
