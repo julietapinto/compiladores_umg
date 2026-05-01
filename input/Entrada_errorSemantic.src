@@ -1,0 +1,5 @@
+EZEQUIELAQUIINICIA () [
+    int x = 10;
+    x = "hola";
+]
+EZEQUIELAQUIFINALIZA ()
