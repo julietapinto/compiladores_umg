@@ -7,6 +7,7 @@ from parser.ExpresionesParser import ExpresionesParser
 from interpreter_visitor import EvalVisitor
 from custom_errors import MyErrorListener
 from semantic_visitor import SemanticVisitor
+from tac_generator import TACGenerator
 
 def main():
     # 1. Leer archivo
@@ -55,6 +56,22 @@ def main():
             return
 
         print("Análisis semántico exitoso.")
+
+        # 7. Generar TAC
+        print("\nGenerando código TAC...")
+        tac = TACGenerator()
+        tac.visit(tree)
+
+        codigo_tac = tac.obtener_codigo()
+
+        print("\n===== TAC =====")
+        print(codigo_tac)
+
+        with open("output/programa.tac", "w") as f:
+            f.write(codigo_tac)
+
+        print("Archivo TAC generado en output/programa.tac")
+        
     except Exception as e:
         print(e)
         return
