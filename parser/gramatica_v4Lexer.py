@@ -150,7 +150,7 @@ def serializedATN():
         357,363,369,377,387,2,6,0,0,1,52,0
     ]
 
-class ExpresionesLexer(Lexer):
+class gramatica_v4Lexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
