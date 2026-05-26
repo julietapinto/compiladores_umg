@@ -1,0 +1,6 @@
+EZEQUIELAQUIINICIA () [
+    int x = 10;
+    float y = (float) x;
+    IMPRIMIR(y);
+]
+EZEQUIELAQUIFINALIZA ()

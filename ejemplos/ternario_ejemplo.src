@@ -1,0 +1,7 @@
+EZEQUIELAQUIINICIA () [
+    int x = 10;
+    int resultado = 0;
+    resultado = x > 5 ? 100 : 200;
+    IMPRIMIR(resultado);
+]
+EZEQUIELAQUIFINALIZA ()

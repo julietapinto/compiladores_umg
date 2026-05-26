@@ -1,0 +1,12 @@
+EZEQUIELAQUIINICIA () [
+    int x = 10;
+    SWITCH (x) [
+        CASE 10:
+            IMPRIMIR("es diez");
+        CASE 20:
+            IMPRIMIR("es veinte");
+        DEFAULT:
+            IMPRIMIR("otro");
+    ]
+]
+EZEQUIELAQUIFINALIZA ()

@@ -1,0 +1,7 @@
+EZEQUIELAQUIINICIA () [
+    STRUCT Persona [
+        int edad;
+        string nombre;
+    ];
+]
+EZEQUIELAQUIFINALIZA ()
