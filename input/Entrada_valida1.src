@@ -1,0 +1,35 @@
+EZEQUIELAQUIINICIA () [
+    string saludo = "Hola";
+    string nombre = " Mundo";
+    string completo = " acio";
+
+    completo = saludo + nombre;
+    IMPRIMIR(completo);
+
+    int arr[3];
+    arr[0] = 10;
+    arr[1] = 20;
+    arr[2] = 30;
+
+    IMPRIMIR(arr[0]);
+    IMPRIMIR(arr[1]);
+
+    int x = 10;
+    int mod = 0;
+
+    mod = x % 3;
+
+    IMPRIMIR(mod);
+
+    int i = 0;
+
+    MIENTRAS [CON i < 3] [
+        CHI_LO_HACE (CON i == 1) [
+            BREAK;
+        ]
+
+        IMPRIMIR(i);
+        i = i + 1;
+    ]
+]
+EZEQUIELAQUIFINALIZA ()

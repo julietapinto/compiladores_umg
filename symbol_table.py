@@ -1,38 +1,37 @@
 class SymbolTable:
     def __init__(self):
-        # La PILA: Una lista de diccionarios (Hash Tables)
-        # Iniciamos con el Ámbito Global en el índice 0
-        self.stack = [{}]
+        self.pila = [{}]
 
     def push_scope(self):
-        """Crea un nuevo nivel de memoria (Scope) al entrar a un bloque []"""
-        self.stack.append({})
-        print("DEBUG: [PUSH] Nuevo ámbito creado.")
+        self.pila.append({})
 
     def pop_scope(self):
-        """Elimina el nivel de memoria actual al salir de un bloque []"""
-        if len(self.stack) > 1:
-            self.stack.pop()
-            print("DEBUG: [POP] Ámbito cerrado. Variables locales eliminadas.")
+        if len(self.pila) > 1:
+            self.pila.pop()
 
-    def declare(self, name, value=0):
-        """Para SONTAY: Registra la variable solo en el nivel actual."""
-        current_scope = self.stack[-1]
-        if name in current_scope:
-            raise Exception(f"Error Semántico: La variable '{name}' ya fue declarada en este ámbito.")
-        current_scope[name] = value
+    def declarar(self, nombre, valor=0):
+        self.pila[-1][nombre] = valor
 
-    def update(self, name, value):
-        """Para '=': Busca la variable en la pila y cambia su valor."""
-        for scope in reversed(self.stack):
-            if name in scope:
-                scope[name] = value
+    def asignar(self, nombre, valor):
+        for scope in reversed(self.pila):
+            if nombre in scope:
+                scope[nombre] = valor
                 return
-        raise Exception(f"Error Semántico: La variable '{name}' no ha sido declarada (Usa SONTAY).")
+        raise Exception(f"[ERROR] Variable '{nombre}' no declarada")
 
-    def lookup(self, name):
-        """Para usar variables: Busca de adentro hacia afuera."""
-        for scope in reversed(self.stack):
-            if name in scope:
-                return scope[name]
-        raise Exception(f"Error Semántico: La variable '{name}' no existe.")
+    def obtener(self, nombre):
+        for scope in reversed(self.pila):
+            if nombre in scope:
+                return scope[nombre]
+        raise Exception(f"[ERROR] Variable '{nombre}' no existe")
+
+    def imprimir_tabla(self):
+        print("\n===== TABLA DE SÍMBOLOS (EJECUCIÓN) =====")
+        for nivel, scope in enumerate(self.pila):
+            print(f"\nScope {nivel}:")
+            if not scope:
+                print("  (vacío)")
+            for nombre, valor in scope.items():
+                if isinstance(valor, bool):
+                    valor = "true" if valor else "false"
+                print(f"  {nombre} -> {repr(valor)}")
