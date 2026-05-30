@@ -4,8 +4,8 @@ import os
 import time  
 
 from antlr4 import *
-from parser.ExpresionesLexer import ExpresionesLexer
-from parser.ExpresionesParser import ExpresionesParser
+from parser.gramatica_v4Lexer import gramatica_v4Lexer
+from parser.gramatica_v4Parser import gramatica_v4Parser
 
 from interpreter_visitor import EvalVisitor
 from custom_errors import MyErrorListener
@@ -25,11 +25,11 @@ def main():
         return
 
     # 2. Lexer
-    lexer = ExpresionesLexer(input_stream)
+    lexer = gramatica_v4Lexer(input_stream)
     token_stream = CommonTokenStream(lexer)
 
     # 3. Parser
-    parser = ExpresionesParser(token_stream)
+    parser = gramatica_v4Parser(token_stream)
 
     lexer.removeErrorListeners()
     parser.removeErrorListeners()
@@ -63,6 +63,7 @@ def main():
         print("Análisis semántico exitoso.")
 
     except Exception as e:
+       
         print(e)
         return
 

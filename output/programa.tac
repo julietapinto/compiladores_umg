@@ -16,7 +16,9 @@ t6 = i == 1
 if t6 goto L4
 goto L5
 L4:
+goto L6
 L5:
+L6:
 t7 = i + 1
 i = t7
 goto L1

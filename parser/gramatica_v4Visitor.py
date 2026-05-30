@@ -1,4 +1,4 @@
-# Generated from gramatica_v4.g4 by ANTLR 4.13.2
+# Generated from gramatica_v4.g4 by ANTLR 4.13.1
 from antlr4 import *
 if "." in __name__:
     from .gramatica_v4Parser import gramatica_v4Parser
@@ -146,6 +146,16 @@ class gramatica_v4Visitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by gramatica_v4Parser#expr.
     def visitExpr(self, ctx:gramatica_v4Parser.ExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by gramatica_v4Parser#comparacionExpr.
+    def visitComparacionExpr(self, ctx:gramatica_v4Parser.ComparacionExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by gramatica_v4Parser#sumaExpr.
+    def visitSumaExpr(self, ctx:gramatica_v4Parser.SumaExprContext):
         return self.visitChildren(ctx)
 
 

@@ -1,4 +1,4 @@
-from parser.ExpresionesVisitor import ExpresionesVisitor
+from parser.gramatica_v4Visitor import gramatica_v4Visitor
 from symbol_table import SymbolTable
 
 
@@ -15,7 +15,7 @@ class ContinueException(Exception):
     pass
 
 
-class EvalVisitor(ExpresionesVisitor):
+class EvalVisitor(gramatica_v4Visitor):
     def __init__(self):
         self.symbols = SymbolTable()
         self.funciones = {}
@@ -25,39 +25,71 @@ class EvalVisitor(ExpresionesVisitor):
             self.visit(ins)
 
     def visitDeclaracion(self, ctx):
-        nombre = ctx.ID().getText()
-        # Array: int arr[5]
-        if ctx.NUM():
+
+        nombre = ctx.ID(0).getText()
+
+        # arreglo
+        if ctx.LBRACKET():
+
             tamano = int(ctx.NUM().getText())
+
             self.symbols.declarar(nombre, [0] * tamano)
+
+            print(f"[DEBUG] Declarando arreglo {nombre}[{tamano}]")
+
             return
-        # Variable normal
-        valor = self.visit(ctx.expr()) if ctx.expr() else 0
+
+        # variable normal
+        valor = 0
+
+        if ctx.ternario():
+            valor = self.visit(ctx.ternario())
+
+        print(f"[DEBUG] Declarando {nombre} = {valor}")
+
         self.symbols.declarar(nombre, valor)
+
         return valor
 
     def visitAsignacion(self, ctx):
-        nombre = ctx.ID().getText()
-        exprs = ctx.expr()
-        # Asignación a array: arr[i] = valor
-        if len(exprs) == 2:
-            indice = self.visit(exprs[0])
-            valor = self.visit(exprs[1])
-            arr = self.symbols.obtener(nombre)
-            arr[indice] = valor
-            return valor
-        # Asignación normal
-        valor = self.visit(exprs[-1])
-        self.symbols.asignar(nombre, valor)
-        return valor
 
+        ids = ctx.ID()
+
+        # arr[indice] = valor
+        if ctx.LBRACKET():
+
+            nombre = ids[0].getText()
+
+            indice = self.visit(ctx.expr())
+
+            valor = self.visit(ctx.ternario())
+
+            print(f"[DEBUG] {nombre}[{indice}] = {valor}")
+
+            arr = self.symbols.obtener(nombre)
+
+            arr[indice] = valor
+
+            return valor
+
+        # variable = valor
+        nombre = ids[0].getText()
+
+        valor = self.visit(ctx.ternario())
+
+        print(f"[DEBUG] {nombre} = {valor}")
+
+        self.symbols.asignar(nombre, valor)
+
+        return valor
+    
     def visitImprimir(self, ctx):
-        valor = self.visit(ctx.expr())
+        valor = self.visit(ctx.ternario())
         print(valor)
         return valor
 
     def visitRetorna(self, ctx):
-        valor = self.visit(ctx.expr())
+        valor = self.visit(ctx.ternario())
         raise ReturnException(valor)
 
     def visitImportStmt(self, ctx):
@@ -127,15 +159,24 @@ class EvalVisitor(ExpresionesVisitor):
         return result
 
     def visitTerm(self, ctx):
-        result = self.visit(ctx.factor(0))
-        for i in range(1, len(ctx.factor())):
+
+        elementos = ctx.castExpr()
+
+        result = self.visit(elementos[0])
+
+        for i in range(1, len(elementos)):
+
+            valor = self.visit(elementos[i])
+
             if ctx.MUL(i - 1):
-                result *= self.visit(ctx.factor(i))
+                result *= valor
+
             elif ctx.DIV(i - 1):
-                divisor = self.visit(ctx.factor(i))
-                result /= divisor if divisor != 0 else 1
+                result /= valor if valor != 0 else 1
+
             elif ctx.MOD(i - 1):
-                result %= self.visit(ctx.factor(i))
+                result %= valor
+
         return result
 
     def visitFactor(self, ctx):
@@ -146,29 +187,43 @@ class EvalVisitor(ExpresionesVisitor):
         if ctx.STRING():
             return ctx.STRING().getText().strip('"')
         if ctx.ID() and ctx.LPAREN():
-            nombre = ctx.ID().getText()
+            nombre = ctx.ID()[0].getText()
             args = []
             if ctx.argumentos():
                 for e in ctx.argumentos().expr():
                     args.append(self.visit(e))
             return self._ejecutarFuncion(nombre, args)
         if ctx.ID() and ctx.LBRACKET():
-            nombre = ctx.ID().getText()
+            nombre = ctx.ID()[0].getText()
             indice = self.visit(ctx.expr())
             arr = self.symbols.obtener(nombre)
             return arr[indice]
         if ctx.ID():
-            return self.symbols.obtener(ctx.ID().getText())
+            return self.symbols.obtener(ctx.ID()[0].getText())
         if ctx.expr():
             return self.visit(ctx.expr())
         return 0
 
     def visitCicloWhile(self, ctx):
+
+        contador = 0
+
         while self.visit(ctx.condicion()):
+
+            contador += 1
+            print(f"[DEBUG] WHILE iteracion {contador}")
+
+            if contador > 100:
+                raise Exception(
+                    "Posible ciclo infinito detectado"
+                )
+
             try:
                 self.visit(ctx.bloqueInstrucciones())
+
             except BreakException:
                 break
+
             except ContinueException:
                 continue
 
@@ -184,10 +239,8 @@ class EvalVisitor(ExpresionesVisitor):
             self.visit(ctx.asignacion(1))
 
     def visitBloqueInstrucciones(self, ctx):
-        self.symbols.push_scope()
         for ins in ctx.instrucciones():
             self.visit(ins)
-        self.symbols.pop_scope()
 
     def visitCondicional(self, ctx):
         condicion = self.visit(ctx.condicion())
@@ -198,11 +251,11 @@ class EvalVisitor(ExpresionesVisitor):
             self.visit(bloques[1])
 
     def visitDecFuncion(self, ctx):
-        nombre = ctx.ID().getText()
+        nombre = ctx.ID()[0].getText()
         self.funciones[nombre] = ctx
 
     def visitLlamadaFuncion(self, ctx):
-        nombre = ctx.ID().getText()
+        nombre = ctx.ID()[0].getText()
         args = []
         if ctx.argumentos():
             for e in ctx.argumentos().expr():

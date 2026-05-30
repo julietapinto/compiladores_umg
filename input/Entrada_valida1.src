@@ -1,29 +1,28 @@
-EZEQUIELAQUIINICIA () [
-    string saludo = "Hola";
-    string nombre = " Mundo";
-    string completo = " acio";
+EZEQUIELAQUIINICIA() [
 
-    completo = saludo + nombre;
-    IMPRIMIR(completo);
+    int a = 10;
+    float b = 2.5;
+    string s = "hola";
 
     int arr[3];
-    arr[0] = 10;
-    arr[1] = 20;
-    arr[2] = 30;
 
-    IMPRIMIR(arr[0]);
+    arr[0] = 1;
+    arr[1] = 2;
+    arr[2] = 3;
+
+    IMPRIMIR(a);
     IMPRIMIR(arr[1]);
 
-    int x = 10;
-    int mod = 0;
+    int x = 5;
 
-    mod = x % 3;
+    int r = x > 0 ? x : -x;
 
-    IMPRIMIR(mod);
+    IMPRIMIR(r);
 
     int i = 0;
 
     MIENTRAS [CON i < 3] [
+
         CHI_LO_HACE (CON i == 1) [
             BREAK;
         ]
@@ -31,5 +30,16 @@ EZEQUIELAQUIINICIA () [
         IMPRIMIR(i);
         i = i + 1;
     ]
+
+    SWITCH (x) [
+        CASE 1:
+            IMPRIMIR(x);
+        CASE 5:
+            IMPRIMIR(x);
+        DEFAULT:
+            IMPRIMIR(0);
+    ]
+
 ]
-EZEQUIELAQUIFINALIZA ()
+
+EZEQUIELAQUIFINALIZA()
