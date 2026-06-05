@@ -90,28 +90,28 @@ def main():
 
     print("Archivo TAC generado en output/programa.tac")
 
-    # =========================
-    # 7.1. GENERAR LLVM IR
-    # =========================
-    print("\nGenerando código LLVM IR...")
+ # =========================
+# 7.1. GENERAR LLVM IR
+# =========================
+print("\nGenerando código LLVM IR...")
 
-    ir_gen = IRGenerator()
-    ir_gen.create_main()
+ir_gen = IRGenerator()
+ir_gen.create_main()
 
-    #  EJEMPLO BÁSICO (luego lo conectas al AST)
-    # Aquí solo probamos que funcione
-    ir_gen.declare_variable("x", 10)
+#  EJEMPLO BÁSICO (luego lo conectas al AST)
+# Aquí solo probamos que funcione
+ir_gen.declare_variable("x", 10)
 
-    x = ir_gen.load_variable("x")
-    res = ir_gen.add(x, ir.Constant(ir.IntType(32), 5))
+x = ir_gen.load_variable("x")
+res = ir_gen.add(x, ir.Constant(ir.IntType(32), 5))
 
-    ir_gen.finish()
+ir_gen.finish()
 
-    # Guardar archivo
-    with open("output/programa.ll", "w") as f:
-        f.write(str(ir_gen.module))
+# Guardar archivo
+with open("output/programa.ll", "w") as f:
+    f.write(str(ir_gen.module))
 
-    print("Archivo LLVM IR generado en output/programa.ll")
+print("Archivo LLVM IR generado en output/programa.ll")
 
     # =========================
     # 8. INTERPRETAR
