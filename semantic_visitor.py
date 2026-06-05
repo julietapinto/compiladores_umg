@@ -28,22 +28,22 @@ class SemanticVisitor(gramatica_v4Visitor):
 
         return str(node)
 
-    def push_scope(self):
+        def push_scope(self):
         self.tabla.push_scope()
 
-    def pop_scope(self):
+        def pop_scope(self):
         self.tabla.pop_scope()
 
-    def buscar(self, nombre):
+        def buscar(self, nombre):
         for scope in reversed(self.tabla.pila):
             if nombre in scope:
                 return scope[nombre]
         return None
 
-    def existe(self, nombre):
+        def existe(self, nombre):
         return self.buscar(nombre) is not None
 
-    def declarar(self, nombre, tipo, valor=None):
+        def declarar(self, nombre, tipo, valor=None):
         if nombre in self.tabla.pila[-1]:
             self.errores.append(f"[ERROR SEMÁNTICO] Variable '{nombre}' ya declarada")
             return
