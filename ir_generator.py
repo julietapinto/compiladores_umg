@@ -2,28 +2,48 @@ from llvmlite import ir
 
 
 class IRGenerator:
+
     def __init__(self):
         self.module = ir.Module(name="programa")
-        self.module.triple = "x86_64-pc-linux-gnu"  # 👈 SOLUCIÓN AL ERROR
+        self.module.triple = "x86_64-pc-linux-gnu"
         self.builder = None
         self.func = None
         self.variables = {}
 
     def create_main(self):
         func_type = ir.FunctionType(ir.IntType(32), [])
-        self.func = ir.Function(self.module, func_type, name="main")
+        self.func = ir.Function(
+            self.module,
+            func_type,
+            name="main"
+        )
 
-        block = self.func.append_basic_block(name="entry")
+        block = self.func.append_basic_block(
+            name="entry"
+        )
+
         self.builder = ir.IRBuilder(block)
 
     def declare_variable(self, name, value):
         int_type = ir.IntType(32)
-        ptr = self.builder.alloca(int_type, name=name)
-        self.builder.store(ir.Constant(int_type, value), ptr)
+
+        ptr = self.builder.alloca(
+            int_type,
+            name=name
+        )
+
+        self.builder.store(
+            ir.Constant(int_type, value),
+            ptr
+        )
+
         self.variables[name] = ptr
 
     def load_variable(self, name):
-        return self.builder.load(self.variables[name], name=name)
+        return self.builder.load(
+            self.variables[name],
+            name=name
+        )
 
     def add(self, left, right):
         return self.builder.add(left, right)
@@ -38,22 +58,56 @@ class IRGenerator:
         return self.builder.sdiv(left, right)
 
     def finish(self):
-        self.builder.ret(ir.Constant(ir.IntType(32), 0))
+        self.builder.ret(
+            ir.Constant(ir.IntType(32), 0)
+        )
 
     def save(self, filename="archivo.ll"):
         with open(filename, "w") as f:
             f.write(str(self.module))
 
+    # //////////////////////////////////////////////////////////
+    # LLVM V4
+    # TAC -> LLVM
+    # //////////////////////////////////////////////////////////
+
+    def generate_from_tac(self, codigo_tac):
+
+        self.create_main()
+
+        lineas = codigo_tac.split("\n")
+
+        for linea in lineas:
+
+            linea = linea.strip()
+
+            if not linea:
+                continue
+
+            print("LLVM <- TAC:", linea)
+
+        self.finish()
+
+
+# //////////////////////////////////////////////////////////
+# PRUEBA LOCAL
+# //////////////////////////////////////////////////////////
+
 if __name__ == "__main__":
+
     gen = IRGenerator()
+
     gen.create_main()
 
-    # x = 5
     gen.declare_variable("x", 5)
 
-    # x + 3
     x = gen.load_variable("x")
-    result = gen.add(x, ir.Constant(ir.IntType(32), 3))
+
+    resultado = gen.add(
+        x,
+        ir.Constant(ir.IntType(32), 3)
+    )
 
     gen.finish()
+
     gen.save("archivo.ll")
