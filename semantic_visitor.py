@@ -189,8 +189,8 @@ class SemanticVisitor(gramatica_v4Visitor):
 
         return result
 
-def visitExpr(self, ctx):
-    return self.visit(ctx.comparacionExpr())
+    def visitExpr(self, ctx):
+        return self.visit(ctx.comparacionExpr())
 
     # ------------------------
     # IMPRIMIR (CORREGIDO)
