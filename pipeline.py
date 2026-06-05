@@ -1,7 +1,7 @@
 import sys
 import traceback
 import os
-import time  
+import time
 
 from antlr4 import *
 from parser.gramatica_v4Lexer import gramatica_v4Lexer
@@ -12,125 +12,242 @@ from custom_errors import MyErrorListener
 from semantic_visitor import SemanticVisitor
 from tac_generator import TACGenerator
 from ir_generator import IRGenerator
-from llvmlite import ir
+
 
 def main():
-    inicio = time.time()  # inicio medición
 
-    # 1. Leer archivo
+    inicio = time.time()
+
+    # ========================================================
+    # FASE 1 - LECTURA DE ARCHIVO
+    # ========================================================
+
     try:
-        input_stream = FileStream("input/Entrada_valida1.src", encoding='utf-8')
+        input_stream = FileStream(
+            "input/Entrada_valida1.src",
+            encoding="utf-8"
+        )
+
     except FileNotFoundError:
-        print("Error: No se encontró el archivo 'Entrada_valida1.src'")
+
+        print(
+            "Error: No se encontró el archivo 'Entrada_valida1.src'"
+        )
+
         return
 
-    # 2. Lexer
-    lexer = gramatica_v4Lexer(input_stream)
-    token_stream = CommonTokenStream(lexer)
+    # ========================================================
+    # FASE 2 - LEXER
+    # ========================================================
 
-    # 3. Parser
-    parser = gramatica_v4Parser(token_stream)
+    lexer = gramatica_v4Lexer(input_stream)
+
+    token_stream = CommonTokenStream(
+        lexer
+    )
+
+    # ========================================================
+    # FASE 3 - PARSER
+    # ========================================================
+
+    parser = gramatica_v4Parser(
+        token_stream
+    )
 
     lexer.removeErrorListeners()
     parser.removeErrorListeners()
-    lexer.addErrorListener(MyErrorListener())
-    parser.addErrorListener(MyErrorListener())
 
-    # 4. Árbol sintáctico
+    lexer.addErrorListener(
+        MyErrorListener()
+    )
+
+    parser.addErrorListener(
+        MyErrorListener()
+    )
+
     tree = parser.root()
-    print("\n===== FASE 1: ANÁLISIS SINTÁCTICO =====")
-    # 5. Validar errores sintácticos
+
+    print(
+        "\n===== FASE 1: ANÁLISIS SINTÁCTICO ====="
+    )
+
     if parser.getNumberOfSyntaxErrors() > 0:
-        print("El programa tiene errores de sintaxis. Deteniendo pipeline.")
+
+        print(
+            "El programa tiene errores de sintaxis. Deteniendo pipeline."
+        )
+
         return
 
-    print("Análisis sintáctico exitoso.")
-    print("\n===== FASE 2: ANÁLISIS SEMÁNTICO =====")
-    # 6. Análisis semántico
+    print(
+        "Análisis sintáctico exitoso."
+    )
+
+    # ========================================================
+    # FASE 2 - SEMÁNTICA
+    # ========================================================
+
+    print(
+        "\n===== FASE 2: ANÁLISIS SEMÁNTICO ====="
+    )
+
     semantic = SemanticVisitor()
+
     try:
+
         semantic.visit(tree)
 
         if len(semantic.errores) > 0:
+
             for error in semantic.errores:
                 print(error)
 
-            print("\nSe encontraron errores semánticos. Deteniendo pipeline.")
+            print(
+                "\nSe encontraron errores semánticos. Deteniendo pipeline."
+            )
+
             return
 
         print("No hay errores semánticos.")
+
         semantic.imprimir_tabla()
-        print("Análisis semántico exitoso.")
+
+        print(
+            "Análisis semántico exitoso."
+        )
 
     except Exception as e:
-       
+
         print(e)
+
         return
 
-    # =========================
-    # 7. GENERAR TAC
-    # =========================
-    print("\n===== FASE 3: GENERACIÓN TAC =====")
-    print("\nGenerando código TAC...")
+    # ========================================================
+    # FASE 3 - TAC
+    # ========================================================
+
+    print(
+        "\n===== FASE 3: GENERACIÓN TAC ====="
+    )
+
+    print(
+        "\nGenerando código TAC..."
+    )
 
     tac = TACGenerator()
+
     tac.visit(tree)
 
     codigo_tac = tac.obtener_codigo()
 
-    print("\n===== TAC =====")
+    print(
+        "\n===== TAC ====="
+    )
+
     print(codigo_tac)
 
-    # Crear carpeta output automáticamente
-    os.makedirs("output", exist_ok=True)  # punto 1
+    os.makedirs(
+        "output",
+        exist_ok=True
+    )
 
-    # Guardar archivo .tac
-    with open("output/programa.tac", "w") as f:
+    with open(
+        "output/programa.tac",
+        "w"
+    ) as f:
+
         f.write(codigo_tac)
 
-    print("Archivo TAC generado en output/programa.tac")
+    print(
+        "Archivo TAC generado en output/programa.tac"
+    )
 
-# //////////////////////////////////////////////////////////
-# LLVM IR V4
-# //////////////////////////////////////////////////////////
+    # ========================================================
+    # FASE 4 - LLVM IR
+    # ========================================================
 
-print("\n===== FASE 4: GENERACIÓN LLVM IR =====")
+    print(
+        "\n===== FASE 4: GENERACIÓN LLVM IR ====="
+    )
 
-ir_gen = IRGenerator()
+    print(
+        "\nGenerando código LLVM IR..."
+    )
 
-ir_gen.generate_from_tac(codigo_tac)
+    ir_gen = IRGenerator()
 
-ir_gen.save("output/programa.ll")
+    ir_gen.generate_from_tac(
+        codigo_tac
+    )
 
-print("Archivo LLVM IR generado en output/programa.ll")
-    # =========================
-    # 8. INTERPRETAR
-    # =========================
-    print("\n===== FASE 4: EJECUCIÓN =====")
-    print("\nEjecutando programa...")
+    ir_gen.save(
+        "output/programa.ll"
+    )
+
+    print(
+        "Archivo LLVM IR generado en output/programa.ll"
+    )
+
+    # ========================================================
+    # FASE 5 - EJECUCIÓN
+    # ========================================================
+
+    print(
+        "\n===== FASE 5: EJECUCIÓN ====="
+    )
+
+    print(
+        "\nEjecutando programa..."
+    )
+
     visitor = EvalVisitor()
 
     try:
+
         visitor.visit(tree)
-    except Exception as e:
+
+    except Exception:
+
         traceback.print_exc()
+
         return
 
-    # 9. Resultados
-    print("\n--- Resultados del Programa ---")
-    for var, val in visitor.symbols.pila[0].items():
-        if isinstance(val, bool):
-            val = "true" if val else "false"
-        print(var, "=", val)
+    # ========================================================
+    # RESULTADOS
+    # ========================================================
 
-    # 10. Tabla final
+    print(
+        "\n--- Resultados del Programa ---"
+    )
+
+    for var, val in visitor.symbols.pila[0].items():
+
+        if isinstance(val, bool):
+
+            val = (
+                "true"
+                if val
+                else "false"
+            )
+
+        print(
+            var,
+            "=",
+            val
+        )
+
     visitor.symbols.imprimir_tabla()
 
-    fin = time.time()  # fin medición
-    print(f"\nTiempo de ejecución: {fin - inicio:.4f} segundos")  # punto 2
+    fin = time.time()
+
+    print(
+        f"\nTiempo de ejecución: {fin - inicio:.4f} segundos"
+    )
+
 
 def run_pipeline():
-        main()
+    main()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
