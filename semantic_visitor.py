@@ -189,26 +189,8 @@ class SemanticVisitor(gramatica_v4Visitor):
 
         return result
 
-    def visitExpr(self, ctx):
-        result = self.visit(ctx.term(0))
-
-        for i in range(1, len(ctx.term())):
-            right = self.visit(ctx.term(i))
-
-            if result is None or right is None:
-                result = None
-                continue
-
-            if ctx.SUM(i - 1):
-                if result in ["int", "float"] and right in ["int", "float"]:
-                    result = "float" if "float" in [result, right] else "int"
-                elif result == "string" and right == "string":
-                    result = "string"
-                else:
-                    self.errores.append("Error en +")
-                    result = None
-
-        return result
+def visitExpr(self, ctx):
+    return self.visit(ctx.comparacionExpr())
 
     # ------------------------
     # IMPRIMIR (CORREGIDO)
