@@ -1,52 +1,62 @@
-EZEQUIELAQUIINICIA () [
-    string saludo = "Hola";
-    string nombre = " Mundo";
-    string completo = " acio";
+EZEQUIELAQUIINICIA() [
+    // Declaración de variables
+    int x = 5;
+    float y;
+    string nombre = "Ezequiel";
 
-    completo = saludo + nombre;
-    IMPRIMIR(completo);
+    // Asignaciones
+    x = x + 10;
+    y = 3.14;
 
-    int arr[3];
-    arr[0] = 10;
-    arr[1] = 20;
-    arr[2] = 30;
+    // Estructura
+    STRUCT Persona [
+        string nombre;
+        int edad;
+    ];
 
-    IMPRIMIR(arr[0]);
-    IMPRIMIR(arr[1]);
-
-    int x = 10;
-    int mod = 0;
-
-    mod = x % 3;
-
-    IMPRIMIR(mod);
-
-    int i = 0;
-    
-    SEGUN (x) [
-
-        CASO 1 [
-            IMPRIMIR("uno");
-            BREAK;
-        ]
-
-        CASO 2 [
-            IMPRIMIR("dos");
-            BREAK;
-        ]
-
-        DEFECTO [
-            IMPRIMIR("otro");
-        ]
+    // Función
+    FUNCION int sumar(int a, int b) [
+        RETORNA a + b;
     ]
 
-    MIENTRAS [CON i < 3] [
-        CHI_LO_HACE (CON i == 1) [
-            BREAK;
-        ]
+    // Llamada de función
+    int resultado = sumar(x, 20);
 
+    // Condicional
+    CHI_LO_HACE(CON x > 10) [
+        IMPRIMIR("X es mayor a 10");
+    ] 
+    TONCES [
+        IMPRIMIR("Este es el bloque entonces");
+    ] 
+    CHI_NO [
+        IMPRIMIR("X no es mayor a 10");
+    ]
+
+    // Ciclo while
+    MIENTRAS [CON x < 20] [
+        x = x + 1;
+    ]
+
+    // Ciclo for
+    PARA [i = 0; CON i < 5; i = i + 1] [
         IMPRIMIR(i);
-        i = i + 1;
     ]
+
+    // Switch
+    SWITCH (x) [
+        CASE 10:
+            IMPRIMIR("X vale 10");
+        CASE 20:
+            IMPRIMIR("X vale 20");
+        DEFAULT:
+            IMPRIMIR("X tiene otro valor");
+    ]
+
+    // Import
+    IMPORT "libreria_ejemplo";
+
+    // Retorna
+    RETORNA resultado;
 ]
-EZEQUIELAQUIFINALIZA ()
+EZEQUIELAQUIFINALIZA()

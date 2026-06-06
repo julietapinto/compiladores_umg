@@ -1,45 +1,62 @@
 EZEQUIELAQUIINICIA() [
-
-    int a = 10;
-    float b = 2.5;
-    string s = "hola";
-
-    int arr[3];
-
-    arr[0] = 1;
-    arr[1] = 2;
-    arr[2] = 3;
-
-    IMPRIMIR(a);
-    IMPRIMIR(arr[1]);
-
+    // Declaración de variables
     int x = 5;
+    float y;
+    string nombre = "Ezequiel";
 
-    int r = x > 0 ? x : -x;
+    // Asignaciones
+    x = x + 10;
+    y = 3.14;
 
-    IMPRIMIR(r);
+    // Estructura
+    STRUCT Persona [
+        string nombre;
+        int edad;
+    ];
 
-    int i = 0;
+    // Función
+    FUNCION int sumar(int a, int b) [
+        RETORNA a + b;
+    ]
 
-    MIENTRAS [CON i < 3] [
+    // Llamada de función
+    int resultado = sumar(x, 20);
 
-        CHI_LO_HACE (CON i == 1) [
-            BREAK;
-        ]
+    // Condicional
+    CHI_LO_HACE(CON x > 10) [
+        IMPRIMIR("X es mayor a 10");
+    ] 
+    TONCES [
+        IMPRIMIR("Este es el bloque entonces");
+    ] 
+    CHI_NO [
+        IMPRIMIR("X no es mayor a 10");
+    ]
 
+    // Ciclo while
+    MIENTRAS [CON x < 20] [
+        x = x + 1;
+    ]
+
+    // Ciclo for
+    PARA [i = 0; CON i < 5; i = i + 1] [
         IMPRIMIR(i);
-        i = i + 1;
     ]
 
+    // Switch
     SWITCH (x) [
-        CASE 1:
-            IMPRIMIR(x);
-        CASE 5:
-            IMPRIMIR(x);
+        CASE 10:
+            IMPRIMIR("X vale 10");
+        CASE 20:
+            IMPRIMIR("X vale 20");
         DEFAULT:
-            IMPRIMIR(0);
+            IMPRIMIR("X tiene otro valor");
     ]
 
-]
+    // Import
+    IMPORT "libreria_ejemplo";
 
+    // Retorna
+    RETORNA resultado;
+]
 EZEQUIELAQUIFINALIZA()

@@ -1,0 +1,64 @@
+EZEQUIELAQUIINICIA() [
+    // Declaraciones
+    int a = 10;
+    int b = 20;
+    float c = 5.5;
+    string mensaje = "Hola Mundo";
+
+    // Asignaciones con operadores
+    a = a + b;
+    c = c * 2.0;
+
+    // Declaración de Struct
+    STRUCT Vehiculo [
+        string marca;
+        int anio;
+        float velocidad;
+    ];
+
+    // Función que no retorna valor
+    FUNCION VACIO saludar(string nombre) [
+        IMPRIMIR("Hola " + nombre);
+    ]
+
+    // Llamadas a funciones
+    saludar("Ezequiel");
+
+    // Condicional con ternario
+    CHI_LO_HACE(CON a > 15) [
+        IMPRIMIR("A es mayor que 15");
+    ] 
+    CHI_NO [
+        IMPRIMIR("A es menor o igual a 15");
+    ]
+
+    // Ciclo while con incremento
+    MIENTRAS [CON b < 25] [
+        b = b + 1;
+    ]
+
+    // Ciclo for
+    PARA [i = 0; CON i < 3; i = i + 1] [
+        IMPRIMIR(i);
+    ]
+
+    // Switch con varios casos y default
+    SWITCH (a) [
+        CASE 10:
+            IMPRIMIR("A es 10");
+        CASE 30:
+            IMPRIMIR("A es 30");
+        DEFAULT:
+            IMPRIMIR("A tiene otro valor");
+    ]
+
+    // Uso de ternario en asignación
+    int max = (a > b) ? a : b;
+
+    // Import de librería
+    IMPORT "utils";
+
+    // Retorna un valor
+    RETORNA max;
+]
+EZEQUIELAQUIFINALIZA()
