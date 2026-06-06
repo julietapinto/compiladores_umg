@@ -22,6 +22,23 @@ EZEQUIELAQUIINICIA () [
     IMPRIMIR(mod);
 
     int i = 0;
+    
+    SEGUN (x) [
+
+        CASO 1 [
+            IMPRIMIR("uno");
+            BREAK;
+        ]
+
+        CASO 2 [
+            IMPRIMIR("dos");
+            BREAK;
+        ]
+
+        DEFECTO [
+            IMPRIMIR("otro");
+        ]
+    ]
 
     MIENTRAS [CON i < 3] [
         CHI_LO_HACE (CON i == 1) [
