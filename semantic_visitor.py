@@ -9,6 +9,7 @@ class SemanticVisitor(gramatica_v4Visitor):
         self.funciones = {}
         self.current_function = None
         self.in_loop = 0
+        self.in_switch = 0
         self.errores = []
 
     # ------------------------

@@ -10,9 +10,12 @@ from parser.gramatica_v4Parser import gramatica_v4Parser
 from interpreter_visitor import EvalVisitor
 from custom_errors import MyErrorListener
 from semantic_visitor import SemanticVisitor
-from tac_generator import TACGenerator
-from ir_generator import IRGenerator
+from tac_geerator import TACGenerator
 
+try:
+    from ir_generator import IRGenerator
+except ImportError:
+    IRGenerator = None
 
 def main():
 
@@ -166,27 +169,35 @@ def main():
     # FASE 4 - LLVM IR
     # ========================================================
 
-    print(
-        "\n===== FASE 4: GENERACIÓN LLVM IR ====="
-    )
+    if IRGenerator is None:
+        print(
+            "\n===== FASE 4: GENERACIÓN LLVM IR ====="
+        )
+        print(
+            "No se puede generar LLVM IR porque no está disponible la dependencia llvmlite."
+        )
+    else:
+        print(
+            "\n===== FASE 4: GENERACIÓN LLVM IR ====="
+        )
 
-    print(
-        "\nGenerando código LLVM IR..."
-    )
+        print(
+            "\nGenerando código LLVM IR..."
+        )
 
-    ir_gen = IRGenerator()
+        ir_gen = IRGenerator()
 
-    ir_gen.generate_from_tac(
-        codigo_tac
-    )
+        ir_gen.generate_from_tac(
+            codigo_tac
+        )
 
-    ir_gen.save(
-        "output/programa.ll"
-    )
+        ir_gen.save(
+            "output/programa.ll"
+        )
 
-    print(
-        "Archivo LLVM IR generado en output/programa.ll"
-    )
+        print(
+            "Archivo LLVM IR generado en output/programa.ll"
+        )
 
     # ========================================================
     # FASE 5 - EJECUCIÓN
@@ -237,17 +248,7 @@ def main():
         )
 
     visitor.symbols.imprimir_tabla()
-
-    fin = time.time()
-
-    print(
-        f"\nTiempo de ejecución: {fin - inicio:.4f} segundos"
-    )
-
-
-def run_pipeline():
-    main()
-
-
-if __name__ == "__main__":
+    
+    
+if __name__ == '__main__':
     main()

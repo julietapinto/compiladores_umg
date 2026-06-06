@@ -146,17 +146,21 @@ class EvalVisitor(gramatica_v4Visitor):
         return False
 
     def visitExpr(self, ctx):
-        result = self.visit(ctx.term(0))
-        for i in range(1, len(ctx.term())):
-            if ctx.SUM(i - 1):
-                next_val = self.visit(ctx.term(i))
-                if isinstance(result, str) or isinstance(next_val, str):
-                    result = str(result) + str(next_val)
-                else:
-                    result += next_val
-            else:
-                result -= self.visit(ctx.term(i))
-        return result
+        return self.visit(ctx.comparacionExpr())
+
+    def visitComparacionExpr(self, ctx):
+        left = self.visit(ctx.sumaExpr(0))
+        if ctx.relop():
+            right = self.visit(ctx.sumaExpr(1))
+            op = ctx.relop().getText()
+            if op == ">":  return left > right
+            if op == "<":  return left < right
+            if op == "==": return left == right
+            if op == "!=": return left != right
+            if op == ">=": return left >= right
+            if op == "<=": return left <= right
+            return False
+        return left
 
     def visitTerm(self, ctx):
 
@@ -249,6 +253,34 @@ class EvalVisitor(gramatica_v4Visitor):
             self.visit(bloques[0])
         elif len(bloques) > 1:
             self.visit(bloques[1])
+
+    def visitSwitchStmt(self, ctx):
+        valor = self.visit(ctx.expr())
+        matched = False
+
+        for case_ctx in ctx.caseStmt():
+            case_value = self.visit(case_ctx.expr())
+            if not matched and valor == case_value:
+                matched = True
+            if matched:
+                try:
+                    self.visit(case_ctx)
+                except BreakException:
+                    return
+
+        if ctx.defaultStmt() and not matched:
+            try:
+                self.visit(ctx.defaultStmt())
+            except BreakException:
+                return
+
+    def visitCaseStmt(self, ctx):
+        for ins in ctx.instrucciones():
+            self.visit(ins)
+
+    def visitDefaultStmt(self, ctx):
+        for ins in ctx.instrucciones():
+            self.visit(ins)
 
     def visitDecFuncion(self, ctx):
         nombre = ctx.ID()[0].getText()
